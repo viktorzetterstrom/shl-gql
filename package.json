@@ -1,0 +1,32 @@
+{
+  "name": "shl-gql",
+  "version": "0.0.1",
+  "description": "GraphQL implementation of the open SHL api",
+  "scripts": {
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/viktorzetterstrom/shl-gql.git"
+  },
+  "author": "Viktor Zetterström",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/viktorzetterstrom/shl-gql/issues"
+  },
+  "homepage": "https://github.com/viktorzetterstrom/shl-gql#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "prettier": "^2.4.1",
+    "ts-node-dev": "^1.1.8"
+  },
+  "dependencies": {
+    "apollo-server-express": "^3.3.0",
+    "class-validator": "^0.13.1",
+    "express": "^4.17.1",
+    "graphql": "^15.5.3",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1",
+    "typescript": "^4.4.3"
+  }
+}
