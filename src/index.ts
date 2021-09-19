@@ -1,18 +1,37 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
 import "reflect-metadata";
-import { ApolloServer } from "apollo-server-express";
 import express from "express";
+import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
-import { TodoResolver } from "./resolvers/todo-resolver";
+
+import { TeamResolver } from "./resolvers/team-resolver";
+import { Shl } from "./data-sources/shl";
+
+export interface Context {
+  dataSources: {
+    shl: Shl;
+  };
+}
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [TodoResolver],
+    resolvers: [TeamResolver],
     emitSchemaFile: true,
   });
 
   const app = express();
 
-  const server = new ApolloServer({ schema });
+  const shl = new Shl(
+    process.env.SHL_ID as string,
+    process.env.SHL_SECRET as string
+  );
+
+  const server = new ApolloServer({
+    schema,
+    dataSources: () => ({ shl }),
+  });
   await server.start();
 
   server.applyMiddleware({ app });

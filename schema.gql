@@ -3,22 +3,19 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type Mutation {
-  addTodo(todoInput: TodoInput!): Todo!
-}
-
 type Query {
-  getTodos: [Todo!]
+  team(teamInput: TeamInput!): Team
+  teams: [Team!]!
 }
 
-type Todo {
-  description: String!
-  id: Float!
-  status: Boolean!
-  title: String!
+type Team {
+  finals: String!
+  founded: String!
+  golds: String!
+  holyNumbers: String
+  teamCode: String!
 }
 
-input TodoInput {
-  description: String!
-  title: String!
+input TeamInput {
+  teamCode: String!
 }
