@@ -1,9 +1,0 @@
-query Teams {
-  teams {
-    teamCode
-    golds
-    finals
-    founded
-    holyNumbers
-  }
-}

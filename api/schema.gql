@@ -4,8 +4,17 @@
 # -----------------------------------------------
 
 type Query {
+  standings(standingsInput: StandingsInput!): [StandingsEntry!]
   team(teamInput: TeamInput!): Team
   teams: [Team!]!
+}
+
+type StandingsEntry {
+  teamCode: String!
+}
+
+input StandingsInput {
+  year: String!
 }
 
 type Team {

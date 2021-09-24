@@ -1,0 +1,15 @@
+query Teams {
+  teams {
+    teamCode
+    golds
+    finals
+    founded
+    holyNumbers
+  }
+}
+
+query Standings($input: StandingsInput!) {
+  standings(standingsInput: $input) {
+    teamCode
+  }
+}

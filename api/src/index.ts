@@ -8,6 +8,7 @@ import { buildSchema } from "type-graphql";
 
 import { TeamResolver } from "./resolvers/team-resolver";
 import { Shl } from "./data-sources/shl";
+import { StandingsResolver } from "./resolvers/standings-resolver";
 
 export interface Context {
   dataSources: {
@@ -17,7 +18,7 @@ export interface Context {
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [TeamResolver],
+    resolvers: [TeamResolver, StandingsResolver],
     emitSchemaFile: true,
   });
 
