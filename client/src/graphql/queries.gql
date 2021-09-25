@@ -8,8 +8,8 @@ query Teams {
   }
 }
 
-query Standings($input: StandingsInput!) {
-  standings(standingsInput: $input) {
+query Standings($input: StatisticsInput!) {
+  standings(input: $input) {
     teamCode
   }
 }

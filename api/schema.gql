@@ -3,17 +3,33 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Goalie {
+  firstName: String!
+  goalsAgainst: Float!
+  lastName: String!
+  playerId: String!
+}
+
 type Query {
-  standings(standingsInput: StandingsInput!): [StandingsEntry!]
-  team(teamInput: TeamInput!): Team
+  goalies(input: StatisticsInput!): [Goalie!]
+  skaters(input: StatisticsInput!): [Skater!]
+  standings(input: StatisticsInput!): [StandingsEntry!]
+  team(input: TeamInput!): Team
   teams: [Team!]!
+}
+
+type Skater {
+  firstName: String!
+  goals: Float!
+  lastName: String!
+  playerId: String!
 }
 
 type StandingsEntry {
   teamCode: String!
 }
 
-input StandingsInput {
+input StatisticsInput {
   year: String!
 }
 

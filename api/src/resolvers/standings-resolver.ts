@@ -1,18 +1,21 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
-import { StandingsEntry, StandingsInput } from "../schemas/standings";
+import { StandingsApiResponse } from "../data-sources/shl";
+import { StatisticsInput } from "../schemas/inputs";
+import { StandingsEntry } from "../schemas/standings";
 
-const formatStandingsResponse = (response: any) =>
-  response.map((row: any) => ({
+const formatStandingsResponse = (
+  response: StandingsApiResponse
+): StandingsEntry[] =>
+  response.map((row) => ({
     teamCode: row.team.code,
   }));
 
-@Resolver((_of) => StandingsEntry)
+@Resolver(() => StandingsEntry)
 export class StandingsResolver {
-  @Query((_returns) => [StandingsEntry], { nullable: true })
+  @Query(() => [StandingsEntry], { nullable: true })
   async standings(
-    @Arg("standingsInput") { year }: StandingsInput,
+    @Arg("input") { year }: StatisticsInput,
     @Ctx() context: Context
   ): Promise<StandingsEntry[]> {
     const response = await context.dataSources.shl

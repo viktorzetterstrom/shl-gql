@@ -1,4 +1,4 @@
-import { Field, ObjectType, InputType } from "type-graphql";
+import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class Team {
@@ -16,10 +16,4 @@ export class Team {
 
   @Field({ nullable: true })
   holyNumbers?: string;
-}
-
-@InputType()
-export class TeamInput implements Partial<Team> {
-  @Field()
-  teamCode!: string;
 }

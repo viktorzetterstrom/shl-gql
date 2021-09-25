@@ -6,14 +6,57 @@ import {
 } from "apollo-datasource-rest";
 
 type ApiResponse = any;
+
+interface TeamFacts {
+  team_code: string;
+  golds: string;
+  finals: string;
+  founded: string;
+  holy: string;
+}
+
+export interface TeamApiResponse {
+  facts: TeamFacts;
+}
+
+export type TeamsApiResponse = TeamFacts[];
+
+interface ApiStandingsEntry {
+  team: {
+    code: string;
+  };
+}
+
+export type StandingsApiResponse = ApiStandingsEntry[];
+
+interface ApiPlayer {
+  player_id: string;
+  info: {
+    first_name: string;
+    last_name: string;
+  };
+}
+
+export interface ApiGoalie extends ApiPlayer {
+  gaa: number;
+}
+
+export type GoalieApiResponse = ApiGoalie[];
+
+export interface ApiSkater extends ApiPlayer {
+  g: number;
+}
+
+export type SkaterApiResponse = ApiGoalie[];
+
 interface Season {
   games: () => Promise<ApiResponse>;
   game: (gameId: string) => Promise<ApiResponse>;
   statistics: {
-    goalkeepers: () => Promise<ApiResponse>;
-    skaters: () => Promise<ApiResponse>;
+    goalies: () => Promise<GoalieApiResponse>;
+    skaters: () => Promise<SkaterApiResponse>;
     teams: {
-      standings: () => Promise<ApiResponse>;
+      standings: () => Promise<StandingsApiResponse>;
     };
   };
 }
@@ -62,7 +105,7 @@ export class Shl extends RESTDataSource {
       games: () => this.get(`${base}/games`),
       game: (gameId: string) => this.get(`${base}/games/${gameId}`),
       statistics: {
-        goalkeepers: () =>
+        goalies: () =>
           this.get(`${base}/statistics/goalkeepers?sort=savesPercent`),
         skaters: () => this.get(`${base}/statistics/players?sort=points`),
         teams: {
@@ -72,11 +115,11 @@ export class Shl extends RESTDataSource {
     };
   }
 
-  teams(): Promise<ApiResponse> {
+  teams(): Promise<TeamsApiResponse> {
     return this.get("/teams");
   }
 
-  team(teamCode: string): Promise<ApiResponse> {
+  team(teamCode: string): Promise<TeamApiResponse> {
     return this.get(`/teams/${teamCode}`);
   }
 

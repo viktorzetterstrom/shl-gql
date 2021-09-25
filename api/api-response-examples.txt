@@ -1,0 +1,162 @@
+
+// Goalie
+{
+  gp: 52,
+  gpi: 25,
+  info: {
+    birthdate: '1995-12-23',
+    first_name: 'Niklas',
+    height: 182,
+    last_name: 'Rubin',
+    nationality: 'SWE',
+    number: 41,
+    player_id: 0,
+    team: [Object],
+    team_code: 'FHC',
+    teams: [Array],
+    weight: 82
+  },
+  player_id: 3304,
+  rank: 10,
+  ga: 51,
+  gaa: 2.169905,
+  gs: 22,
+  l: 10,
+  mip: '1410:12',
+  so: 2,
+  soga: 590,
+  svs: 539,
+  svsperc: 91.3559341,
+  t: 0,
+  valid_ranking: true,
+  w: 12
+}
+
+// Skater
+{
+  gp: 52,
+  info: {
+    birthdate: '1993-08-27',
+    first_name: 'Fredrik',
+    height: 194,
+    last_name: 'Händemark',
+    nationality: 'SWE',
+    number: 63,
+    player_id: 0,
+    position: 'F',
+    team: [Object],
+    team_code: 'NOT',
+    teams: [Array],
+    weight: 95
+  },
+  player_id: 2467,
+  rank: 10,
+  toi: 58042,
+  toi_gp: '18:36',
+  a: 24,
+  bk_s: 18,
+  g: 14,
+  gwg: 4,
+  hits: 48,
+  minus: 29,
+  pim: 65,
+  ppg: 3,
+  plus: 38,
+  plus_minus: 9,
+  sog: 109,
+  tp: 38
+}
+
+// Standings
+{
+  gp: 52,
+  rank: 14,
+  team: { code: 'IKO', id: 'IKO' },
+  team_code: 'IKO',
+  diff: -70,
+  g: 110,
+  ga: 180,
+  non_reg_l: 8,
+  non_reg_non_w: 8,
+  non_reg_t: 0,
+  non_reg_w: 3,
+  otl: 6,
+  ott: 0,
+  otw: 1,
+  points: 44,
+  reg_l: 31,
+  reg_t: 0,
+  reg_w: 10,
+  sol: 2,
+  sow: 2
+}
+
+// Teams 
+{
+  accreditation: { contact_information: 'press@vaxjolakers.se' },
+  chairman: 'Anna Arvsell',
+  contact: {
+    address: 'Storgatan 86\r\n352 46 Växjö',
+    email: 'kansli@vaxjolakers.se',
+    phone: '0470-32 97 00'
+  },
+  finals: '3 st (2015, 2018, 2021)',
+  founded: '1997',
+  golds: '3 st (2015, 2018, 2021)',
+  holy: '# 38 Johan Markusson',
+  president: 'Johan Markusson',
+  team_code: 'VLH'
+}
+
+// Team
+{
+  facts: {
+    accreditation: { contact_information: 'robert.hedlund@luleahockey.se' },
+    chairman: 'Anders Olofsson',
+    contact: {
+      address: 'Luleå Hockey\r\nOstrongatan 2\r\n973 34 Luleå',
+      email: 'info@luleahockey.se',
+      phone: '0920-52 82 00'
+    },
+    finals: '4 st (1993, 1996, 1997, 2013)',
+    founded: '1977',
+    golds: '1 st (1996)',
+    holy: '# 12 Johan Strömwall\r\n' +
+      '# 35 Jarmo Myllys\r\n' +
+      '#  4  Stefan "Skuggan" Nilsson\r\n' +
+      '# 28 Roger Åkerström\r\n' +
+      '\r\n' +
+      '# 22 Hans Norberg förlamades under en match 1989 och sen dess har hans tröjnummer aldrig använts i Luleå Hockey',
+    president: 'Stefan Enbom',
+    team_code: 'LHF'
+  },
+  players: [
+    {
+      assistant: false,
+      captain: false,
+      date_of_birth: '2002-11-14',
+      default_jersey: 1,
+      first_name: 'Jesper',
+      height: 190,
+      last_name: 'Wallstedt',
+      nationality: 'SE',
+      player_id: 'qUw-2LSvLL6sB',
+      player_url_desktop: 'https://www.shl.se/lag/1a71-1a71gTHKh__lulea-hockey/qUw-2LSvLL6sB__jesper-wallstedt',
+      player_url_mobile: 'https://www.shl.se/lag/1a71-1a71gTHKh__lulea-hockey/qUw-2LSvLL6sB__jesper-wallstedt',
+      position: 'Ice hockey - Målvakt',
+      shoots: 'left',
+      shoots_right: false,
+      weight: 92
+    },
+    ...
+  ],
+  staff: [
+    {
+      first_name: 'Thomas',
+      last_name: 'Berglund',
+      nationality: 'SE',
+      staff_id: 'qQ9-553dQ0iDH'
+    },
+    ...
+  ]
+}

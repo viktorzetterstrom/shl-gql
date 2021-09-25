@@ -6,9 +6,13 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 
-import { TeamResolver } from "./resolvers/team-resolver";
 import { Shl } from "./data-sources/shl";
-import { StandingsResolver } from "./resolvers/standings-resolver";
+import {
+  TeamsResolver,
+  StandingsResolver,
+  GoaliesResolver,
+  SkatersResolver,
+} from "./resolvers";
 
 export interface Context {
   dataSources: {
@@ -18,7 +22,12 @@ export interface Context {
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [TeamResolver, StandingsResolver],
+    resolvers: [
+      TeamsResolver,
+      StandingsResolver,
+      GoaliesResolver,
+      SkatersResolver,
+    ],
     emitSchemaFile: true,
   });
 
