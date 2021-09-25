@@ -15,19 +15,11 @@ interface TeamFacts {
   holy: string;
 }
 
-export interface TeamApiResponse {
-  facts: TeamFacts;
-}
-
-export type TeamsApiResponse = TeamFacts[];
-
 interface ApiStandingsEntry {
   team: {
     code: string;
   };
 }
-
-export type StandingsApiResponse = ApiStandingsEntry[];
 
 interface ApiPlayer {
   player_id: string;
@@ -37,17 +29,21 @@ interface ApiPlayer {
   };
 }
 
-export interface ApiGoalie extends ApiPlayer {
+interface ApiGoalie extends ApiPlayer {
   gaa: number;
 }
 
-export type GoalieApiResponse = ApiGoalie[];
-
-export interface ApiSkater extends ApiPlayer {
+interface ApiSkater extends ApiPlayer {
   g: number;
 }
 
-export type SkaterApiResponse = ApiGoalie[];
+export interface TeamApiResponse {
+  facts: TeamFacts;
+}
+export type TeamsApiResponse = TeamFacts[];
+export type GoalieApiResponse = ApiGoalie[];
+export type StandingsApiResponse = ApiStandingsEntry[];
+export type SkaterApiResponse = ApiSkater[];
 
 interface Season {
   games: () => Promise<ApiResponse>;
