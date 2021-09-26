@@ -6,8 +6,17 @@ import { StatisticsInput, StandingsEntry } from "../schemas";
 const formatStandingsResponse = (
   response: StandingsApiResponse
 ): StandingsEntry[] =>
-  response.map((row) => ({
-    teamCode: row.team.code,
+  response.map((entry) => ({
+    teamCode: entry.team.code,
+    rank: entry.rank,
+    threePoints: entry.reg_w,
+    twoPoints: entry.otw + entry.sow,
+    onePoints: entry.otl + entry.sol,
+    zeroPoints: entry.reg_l,
+    goals: entry.g,
+    goalsAgainst: entry.ga,
+    plusMinus: entry.diff,
+    points: entry.points,
   }));
 
 @Resolver(() => StandingsEntry)

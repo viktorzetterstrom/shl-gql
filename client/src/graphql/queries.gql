@@ -11,5 +11,14 @@ query Teams {
 query Standings($input: StatisticsInput!) {
   standings(input: $input) {
     teamCode
+    goals
+    goalsAgainst
+    onePoints
+    plusMinus
+    rank
+    threePoints
+    twoPoints
+    zeroPoints
+    points
   }
 }

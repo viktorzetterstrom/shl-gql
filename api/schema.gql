@@ -74,7 +74,16 @@ enum SkatersSortOrder {
 }
 
 type StandingsEntry {
+  goals: Float!
+  goalsAgainst: Float!
+  onePoints: Float!
+  plusMinus: Float!
+  points: Float!
+  rank: Float!
   teamCode: String!
+  threePoints: Float!
+  twoPoints: Float!
+  zeroPoints: Float!
 }
 
 input StatisticsInput {

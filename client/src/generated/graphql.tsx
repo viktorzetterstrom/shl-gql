@@ -131,7 +131,16 @@ export enum SkatersSortOrder {
 
 export type StandingsEntry = {
   __typename?: 'StandingsEntry';
+  goals: Scalars['Float'];
+  goalsAgainst: Scalars['Float'];
+  onePoints: Scalars['Float'];
+  plusMinus: Scalars['Float'];
+  points: Scalars['Float'];
+  rank: Scalars['Float'];
   teamCode: Scalars['String'];
+  threePoints: Scalars['Float'];
+  twoPoints: Scalars['Float'];
+  zeroPoints: Scalars['Float'];
 };
 
 export type StatisticsInput = {
@@ -166,7 +175,7 @@ export type StandingsQueryVariables = Exact<{
 }>;
 
 
-export type StandingsQuery = { __typename?: 'Query', standings?: Maybe<Array<{ __typename?: 'StandingsEntry', teamCode: string }>> };
+export type StandingsQuery = { __typename?: 'Query', standings?: Maybe<Array<{ __typename?: 'StandingsEntry', teamCode: string, goals: number, goalsAgainst: number, onePoints: number, plusMinus: number, rank: number, threePoints: number, twoPoints: number, zeroPoints: number, points: number }>> };
 
 
 export const TeamsDocument = gql`
@@ -211,6 +220,15 @@ export const StandingsDocument = gql`
     query Standings($input: StatisticsInput!) {
   standings(input: $input) {
     teamCode
+    goals
+    goalsAgainst
+    onePoints
+    plusMinus
+    rank
+    threePoints
+    twoPoints
+    zeroPoints
+    points
   }
 }
     `;

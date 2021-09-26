@@ -11,7 +11,40 @@ interface StandingsProps {
 }
 
 const Standings: NextPage<StandingsProps> = ({ standings }) => {
-  return <div>{JSON.stringify(standings)}</div>;
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>3p</th>
+            <th>2p</th>
+            <th>1p</th>
+            <th>0p</th>
+            <th>G</th>
+            <th>GA</th>
+            <th>+/-</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {standings.map((entry) => (
+            <tr key={entry.teamCode}>
+              <td>{entry.teamCode}</td>
+              <td>{entry.threePoints}</td>
+              <td>{entry.twoPoints}</td>
+              <td>{entry.onePoints}</td>
+              <td>{entry.zeroPoints}</td>
+              <td>{entry.goals}</td>
+              <td>{entry.goalsAgainst}</td>
+              <td>{entry.plusMinus}</td>
+              <td>{entry.points}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export async function getStaticProps() {
@@ -19,7 +52,7 @@ export async function getStaticProps() {
     query: StandingsDocument,
     variables: {
       input: {
-        year: "2019",
+        year: "2021",
       },
     },
   });
