@@ -1,8 +1,7 @@
 import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
-import { GameApiResponse, GamesApiResponse } from "../data-sources/shl";
-import { Game } from "../schemas/games";
-import { GameInput, StatisticsInput } from "../schemas/inputs";
+import { GameApiResponse, GamesApiResponse } from "../data-sources";
+import { Game, GameInput, StatisticsInput } from "../schemas";
 
 const formatGameApiResponse = (response: GameApiResponse): Game => ({
   gameId: String(response.game_id),
@@ -22,8 +21,6 @@ export class GamesResolver {
   ): Promise<Game> {
     const response = await context.dataSources.shl.season(year).game(gameId);
 
-    console.log(response);
-
     return formatGameApiResponse(response);
   }
 
@@ -33,8 +30,6 @@ export class GamesResolver {
     @Ctx() context: Context
   ): Promise<Game[]> {
     const response = await context.dataSources.shl.season(year).games();
-
-    console.log(response);
 
     return formatGamesApiResponse(response);
   }

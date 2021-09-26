@@ -1,8 +1,7 @@
 import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
-import { StandingsApiResponse } from "../data-sources/shl";
-import { StatisticsInput } from "../schemas/inputs";
-import { StandingsEntry } from "../schemas/standings";
+import { StandingsApiResponse } from "../data-sources";
+import { StatisticsInput, StandingsEntry } from "../schemas";
 
 const formatStandingsResponse = (
   response: StandingsApiResponse

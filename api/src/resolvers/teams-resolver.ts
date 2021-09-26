@@ -1,8 +1,7 @@
 import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
-import { TeamApiResponse, TeamsApiResponse } from "../data-sources/shl";
-import { TeamInput } from "../schemas/inputs";
-import { Team } from "../schemas/teams";
+import { TeamApiResponse, TeamsApiResponse } from "../data-sources";
+import { TeamInput, Team } from "../schemas";
 
 const formatTeamApiResponse = (row: TeamApiResponse): Team => ({
   teamCode: row.facts.team_code,

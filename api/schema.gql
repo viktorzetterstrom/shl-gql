@@ -3,6 +3,10 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Article {
+  articleId: String!
+}
+
 type Game {
   gameId: String!
 }
@@ -19,14 +23,33 @@ type Goalie {
   playerId: String!
 }
 
+input GoaliesInput {
+  sortOrder: GoaliesSortOrder = SavesPercent
+  year: String!
+}
+
+enum GoaliesSortOrder {
+  GoalsAgainst
+  GoalsAgainstAverage
+  Lost
+  MinutesInPlay
+  Saves
+  SavesPercent
+  ShooutOuts
+  Tied
+  Won
+}
+
 type Query {
+  articles(input: TeamInput): [Article!]!
   game(input: GameInput!): Game
   games(input: StatisticsInput!): [Game!]!
-  goalies(input: StatisticsInput!): [Goalie!]
-  skaters(input: StatisticsInput!): [Skater!]
+  goalies(input: GoaliesInput!): [Goalie!]
+  skaters(input: SkatersInput!): [Skater!]
   standings(input: StatisticsInput!): [StandingsEntry!]
   team(input: TeamInput!): Team
   teams: [Team!]!
+  videos(input: TeamInput): [Video!]!
 }
 
 type Skater {
@@ -34,6 +57,20 @@ type Skater {
   goals: Float!
   lastName: String!
   playerId: String!
+}
+
+input SkatersInput {
+  sortOrder: SkatersSortOrder = Points
+  year: String!
+}
+
+enum SkatersSortOrder {
+  Assists
+  Goals
+  Hits
+  PenaltyMinutes
+  PlusMinus
+  Points
 }
 
 type StandingsEntry {
@@ -54,4 +91,8 @@ type Team {
 
 input TeamInput {
   teamCode: String!
+}
+
+type Video {
+  videoId: String!
 }

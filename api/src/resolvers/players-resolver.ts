@@ -1,8 +1,7 @@
 import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
-import { GoalieApiResponse, SkaterApiResponse } from "../data-sources/shl";
-import { StatisticsInput } from "../schemas/inputs";
-import { Goalie, Skater } from "../schemas/players";
+import { GoalieApiResponse, SkaterApiResponse } from "../data-sources";
+import { Goalie, GoaliesInput, Skater, SkatersInput } from "../schemas";
 
 const formatGoaliesApiResponse = (response: GoalieApiResponse): Goalie[] =>
   response.map((goalie) => ({
@@ -24,14 +23,12 @@ const formatSkatersApiResponse = (response: SkaterApiResponse): Skater[] =>
 export class GoaliesResolver {
   @Query(() => [Goalie], { nullable: true })
   async goalies(
-    @Arg("input") { year }: StatisticsInput,
+    @Arg("input") { year, sortOrder }: GoaliesInput,
     @Ctx() context: Context
   ): Promise<Goalie[]> {
     const response = await context.dataSources.shl
       .season(year)
-      .statistics.goalies();
-
-    console.log(JSON.stringify(response, null, 2));
+      .statistics.goalies(sortOrder);
 
     return formatGoaliesApiResponse(response);
   }
@@ -41,12 +38,12 @@ export class GoaliesResolver {
 export class SkatersResolver {
   @Query(() => [Skater], { nullable: true })
   async skaters(
-    @Arg("input") { year }: StatisticsInput,
+    @Arg("input") { year, sortOrder }: SkatersInput,
     @Ctx() context: Context
   ): Promise<Skater[]> {
     const response = await context.dataSources.shl
       .season(year)
-      .statistics.skaters();
+      .statistics.skaters(sortOrder);
 
     return formatSkatersApiResponse(response);
   }

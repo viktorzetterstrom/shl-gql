@@ -6,13 +6,15 @@ import express from "express";
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 
-import { Shl } from "./data-sources/shl";
+import { Shl } from "./data-sources";
 import {
+  ArticlesResolver,
   GamesResolver,
-  TeamsResolver,
-  StandingsResolver,
   GoaliesResolver,
   SkatersResolver,
+  StandingsResolver,
+  TeamsResolver,
+  VideosResolver,
 } from "./resolvers";
 
 export interface Context {
@@ -24,11 +26,13 @@ export interface Context {
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [
+      ArticlesResolver,
       GamesResolver,
-      TeamsResolver,
-      StandingsResolver,
       GoaliesResolver,
       SkatersResolver,
+      StandingsResolver,
+      TeamsResolver,
+      VideosResolver,
     ],
     emitSchemaFile: true,
   });
