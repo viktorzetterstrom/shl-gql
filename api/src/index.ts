@@ -8,6 +8,7 @@ import { buildSchema } from "type-graphql";
 
 import { Shl } from "./data-sources/shl";
 import {
+  GamesResolver,
   TeamsResolver,
   StandingsResolver,
   GoaliesResolver,
@@ -23,6 +24,7 @@ export interface Context {
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [
+      GamesResolver,
       TeamsResolver,
       StandingsResolver,
       GoaliesResolver,

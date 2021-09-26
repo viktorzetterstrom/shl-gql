@@ -5,7 +5,29 @@ import {
   RESTDataSource,
 } from "apollo-datasource-rest";
 
-type ApiResponse = any;
+interface ApiGame {
+  game_id: number;
+  away_team_code: string;
+  away_team_result: number;
+  game_center_active: boolean;
+  game_center_url_desktop: string;
+  game_center_url_mobile: string;
+  game_type: string;
+  game_uuid: string;
+  highlights_coverage_enabled: number;
+  home_team_code: string;
+  home_team_result: number;
+  live_coverage_enabled: number;
+  overtime: number;
+  penalty_shots: number;
+  played: number;
+  season: string;
+  series: string;
+  start_date_time: string;
+  ticket_url: string;
+  tv_channels: string[];
+  venue: string;
+}
 
 interface ApiTeamPlayer {
   player_id: string;
@@ -136,10 +158,14 @@ export type TeamsApiResponse = ApiTeamFacts[];
 export type GoalieApiResponse = ApiGoalieStatistics[];
 export type StandingsApiResponse = ApiStandingsEntry[];
 export type SkaterApiResponse = ApiSkaterStatistics[];
+export type GamesApiResponse = ApiGame[];
+export type GameApiResponse = ApiGame;
+export type VideosApiResponse = any;
+export type ArticlesApiResponse = any;
 
 interface Season {
-  games: () => Promise<ApiResponse>;
-  game: (gameId: string) => Promise<ApiResponse>;
+  games: () => Promise<GamesApiResponse>;
+  game: (gameId: string) => Promise<GameApiResponse>;
   statistics: {
     goalies: () => Promise<GoalieApiResponse>;
     skaters: () => Promise<SkaterApiResponse>;
@@ -211,11 +237,11 @@ export class Shl extends RESTDataSource {
     return this.get(`/teams/${teamCode}`);
   }
 
-  videos(): Promise<ApiResponse> {
+  videos(): Promise<VideosApiResponse> {
     return this.get("/videos");
   }
 
-  articles(): Promise<ApiResponse> {
+  articles(): Promise<ArticlesApiResponse> {
     return this.get("articles");
   }
 }

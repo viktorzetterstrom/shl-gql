@@ -3,6 +3,15 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Game {
+  gameId: String!
+}
+
+input GameInput {
+  gameId: String!
+  year: String!
+}
+
 type Goalie {
   firstName: String!
   goalsAgainst: Float!
@@ -11,6 +20,8 @@ type Goalie {
 }
 
 type Query {
+  game(input: GameInput!): Game
+  games(input: StatisticsInput!): [Game!]!
   goalies(input: StatisticsInput!): [Goalie!]
   skaters(input: StatisticsInput!): [Skater!]
   standings(input: StatisticsInput!): [StandingsEntry!]
