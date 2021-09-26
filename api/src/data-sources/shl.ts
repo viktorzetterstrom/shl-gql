@@ -7,43 +7,135 @@ import {
 
 type ApiResponse = any;
 
-interface TeamFacts {
+interface ApiTeamPlayer {
+  player_id: string;
+  assistant: boolean;
+  captain: boolean;
+  date_of_birth: string;
+  default_jersey: number;
+  first_name: string;
+  height: number;
+  last_name: string;
+  nationality: string;
+  player_url_desktop: string;
+  player_url_mobile: string;
+  position: string;
+  shoots: string;
+  shoots_right: boolean;
+  weight: number;
+}
+
+interface ApiTeamStaffMember {
+  first_name: string;
+  last_name: string;
+  nationality: string;
+}
+
+interface ApiTeamFacts {
   team_code: string;
-  golds: string;
+  accreditation: { contact_information: string };
+  contact: {
+    address: string;
+    email: string;
+    phone: string;
+  };
   finals: string;
   founded: string;
+  golds: string;
   holy: string;
+  chairman: string;
+  president: string;
 }
 
 interface ApiStandingsEntry {
+  team_code: string;
+  gp: number;
+  rank: number;
   team: {
     code: string;
+    id: string;
   };
-}
-
-interface ApiPlayer {
-  player_id: string;
-  info: {
-    first_name: string;
-    last_name: string;
-  };
-}
-
-interface ApiGoalie extends ApiPlayer {
-  gaa: number;
-}
-
-interface ApiSkater extends ApiPlayer {
+  diff: number;
   g: number;
+  ga: number;
+  non_reg_l: number;
+  non_reg_non_w: number;
+  non_reg_t: number;
+  non_reg_w: number;
+  otl: number;
+  ott: number;
+  otw: number;
+  points: number;
+  reg_l: number;
+  reg_t: number;
+  reg_w: number;
+  sol: number;
+  sow: number;
+}
+
+interface ApiPlayerStatistics {
+  player_id: string;
+  gp: number;
+  rank: number;
+  info: {
+    birthdate: string;
+    first_name: string;
+    height: number;
+    last_name: string;
+    nationality: string;
+    number: number;
+    player_id: number;
+    team: {
+      code: string;
+      id: string;
+    };
+    team_code: string;
+    teams: string[];
+    weight: number;
+  };
+}
+
+interface ApiGoalieStatistics extends ApiPlayerStatistics {
+  ga: number;
+  gaa: number;
+  gs: number;
+  l: number;
+  mip: string;
+  so: number;
+  soga: number;
+  svs: number;
+  svsperc: number;
+  t: number;
+  valid_ranking: boolean;
+  w: string;
+}
+
+interface ApiSkaterStatistics extends ApiPlayerStatistics {
+  toi: number;
+  toi_gp: string;
+  a: number;
+  bk_s: number;
+  g: number;
+  gwg: number;
+  hits: number;
+  minus: number;
+  pim: number;
+  ppg: number;
+  plus: number;
+  plus_minus: number;
+  sog: number;
+  tp: number;
 }
 
 export interface TeamApiResponse {
-  facts: TeamFacts;
+  facts: ApiTeamFacts;
+  players: ApiTeamPlayer[];
+  staff: ApiTeamStaffMember[];
 }
-export type TeamsApiResponse = TeamFacts[];
-export type GoalieApiResponse = ApiGoalie[];
+export type TeamsApiResponse = ApiTeamFacts[];
+export type GoalieApiResponse = ApiGoalieStatistics[];
 export type StandingsApiResponse = ApiStandingsEntry[];
-export type SkaterApiResponse = ApiSkater[];
+export type SkaterApiResponse = ApiSkaterStatistics[];
 
 interface Season {
   games: () => Promise<ApiResponse>;
