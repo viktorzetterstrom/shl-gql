@@ -7,7 +7,7 @@ import {
 } from "../generated/graphql";
 
 interface StandingsProps {
-  standings: StandingsEntry[];
+  standings: StandingsQuery["standings"];
 }
 
 const Standings: NextPage<StandingsProps> = ({ standings }) => {
@@ -28,7 +28,7 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => {
           </tr>
         </thead>
         <tbody>
-          {standings.map((entry) => (
+          {standings?.map((entry) => (
             <tr key={entry.teamCode}>
               <td>{entry.teamCode}</td>
               <td>{entry.threePoints}</td>
@@ -48,7 +48,7 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => {
 };
 
 export async function getStaticProps() {
-  const { data, error } = await client.query<StandingsQuery>({
+  const { data } = await client.query<StandingsQuery>({
     query: StandingsDocument,
     variables: {
       input: {

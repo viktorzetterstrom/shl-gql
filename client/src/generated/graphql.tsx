@@ -21,7 +21,11 @@ export type Article = {
 
 export type Game = {
   __typename?: 'Game';
+  away: Scalars['String'];
   gameId: Scalars['String'];
+  home: Scalars['String'];
+  result: Scalars['String'];
+  time: Scalars['String'];
 };
 
 export type GameInput = {
@@ -58,7 +62,7 @@ export type Query = {
   __typename?: 'Query';
   articles: Array<Article>;
   game?: Maybe<Game>;
-  games: Array<Game>;
+  games?: Maybe<Array<Game>>;
   goalies?: Maybe<Array<Goalie>>;
   skaters?: Maybe<Array<Skater>>;
   standings?: Maybe<Array<StandingsEntry>>;
@@ -170,6 +174,13 @@ export type TeamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', teamCode: string, golds: string, finals: string, founded: string, holyNumbers?: Maybe<string> }> };
 
+export type GamesQueryVariables = Exact<{
+  input: StatisticsInput;
+}>;
+
+
+export type GamesQuery = { __typename?: 'Query', games?: Maybe<Array<{ __typename?: 'Game', gameId: string, time: string, away: string, home: string, result: string }>> };
+
 export type StandingsQueryVariables = Exact<{
   input: StatisticsInput;
 }>;
@@ -216,6 +227,45 @@ export function useTeamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Team
 export type TeamsQueryHookResult = ReturnType<typeof useTeamsQuery>;
 export type TeamsLazyQueryHookResult = ReturnType<typeof useTeamsLazyQuery>;
 export type TeamsQueryResult = Apollo.QueryResult<TeamsQuery, TeamsQueryVariables>;
+export const GamesDocument = gql`
+    query Games($input: StatisticsInput!) {
+  games(input: $input) {
+    gameId
+    time
+    away
+    home
+    result
+  }
+}
+    `;
+
+/**
+ * __useGamesQuery__
+ *
+ * To run a query within a React component, call `useGamesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGamesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGamesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGamesQuery(baseOptions: Apollo.QueryHookOptions<GamesQuery, GamesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GamesQuery, GamesQueryVariables>(GamesDocument, options);
+      }
+export function useGamesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GamesQuery, GamesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GamesQuery, GamesQueryVariables>(GamesDocument, options);
+        }
+export type GamesQueryHookResult = ReturnType<typeof useGamesQuery>;
+export type GamesLazyQueryHookResult = ReturnType<typeof useGamesLazyQuery>;
+export type GamesQueryResult = Apollo.QueryResult<GamesQuery, GamesQueryVariables>;
 export const StandingsDocument = gql`
     query Standings($input: StatisticsInput!) {
   standings(input: $input) {

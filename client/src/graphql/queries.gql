@@ -8,6 +8,16 @@ query Teams {
   }
 }
 
+query Games($input: StatisticsInput!) {
+  games(input: $input) {
+    gameId
+    time
+    away
+    home
+    result
+  }
+}
+
 query Standings($input: StatisticsInput!) {
   standings(input: $input) {
     teamCode

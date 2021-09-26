@@ -4,4 +4,16 @@ import { Field, ObjectType } from "type-graphql";
 export class Game {
   @Field()
   gameId!: string;
+
+  @Field()
+  time!: string;
+
+  @Field()
+  home!: string;
+
+  @Field()
+  away!: string;
+
+  @Field()
+  result!: string;
 }

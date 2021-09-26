@@ -5,11 +5,19 @@ import { Game, GameInput, StatisticsInput } from "../schemas";
 
 const formatGameApiResponse = (response: GameApiResponse): Game => ({
   gameId: String(response.game_id),
+  time: response.start_date_time,
+  home: response.home_team_code,
+  away: response.away_team_code,
+  result: `${response.home_team_result}-${response.away_team_result}`,
 });
 
 const formatGamesApiResponse = (response: GamesApiResponse): Game[] =>
   response.map((game) => ({
     gameId: String(game.game_id),
+    time: game.start_date_time,
+    home: game.home_team_code,
+    away: game.away_team_code,
+    result: `${game.home_team_result}-${game.away_team_result}`,
   }));
 
 @Resolver(() => Game)
@@ -24,7 +32,7 @@ export class GamesResolver {
     return formatGameApiResponse(response);
   }
 
-  @Query(() => [Game])
+  @Query(() => [Game], { nullable: true })
   async games(
     @Arg("input") { year }: StatisticsInput,
     @Ctx() context: Context
