@@ -188,6 +188,20 @@ export type StandingsQueryVariables = Exact<{
 
 export type StandingsQuery = { __typename?: 'Query', standings?: Maybe<Array<{ __typename?: 'StandingsEntry', teamCode: string, goals: number, goalsAgainst: number, onePoints: number, plusMinus: number, rank: number, threePoints: number, twoPoints: number, zeroPoints: number, points: number }>> };
 
+export type GoaliesQueryVariables = Exact<{
+  input: GoaliesInput;
+}>;
+
+
+export type GoaliesQuery = { __typename?: 'Query', goalies?: Maybe<Array<{ __typename?: 'Goalie', firstName: string, goalsAgainst: number, lastName: string, playerId: string }>> };
+
+export type SkatersQueryVariables = Exact<{
+  input: SkatersInput;
+}>;
+
+
+export type SkatersQuery = { __typename?: 'Query', skaters?: Maybe<Array<{ __typename?: 'Skater', firstName: string, goals: number, lastName: string, playerId: string }>> };
+
 
 export const TeamsDocument = gql`
     query Teams {
@@ -310,6 +324,82 @@ export function useStandingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type StandingsQueryHookResult = ReturnType<typeof useStandingsQuery>;
 export type StandingsLazyQueryHookResult = ReturnType<typeof useStandingsLazyQuery>;
 export type StandingsQueryResult = Apollo.QueryResult<StandingsQuery, StandingsQueryVariables>;
+export const GoaliesDocument = gql`
+    query Goalies($input: GoaliesInput!) {
+  goalies(input: $input) {
+    firstName
+    goalsAgainst
+    lastName
+    playerId
+  }
+}
+    `;
+
+/**
+ * __useGoaliesQuery__
+ *
+ * To run a query within a React component, call `useGoaliesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGoaliesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGoaliesQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useGoaliesQuery(baseOptions: Apollo.QueryHookOptions<GoaliesQuery, GoaliesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GoaliesQuery, GoaliesQueryVariables>(GoaliesDocument, options);
+      }
+export function useGoaliesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GoaliesQuery, GoaliesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GoaliesQuery, GoaliesQueryVariables>(GoaliesDocument, options);
+        }
+export type GoaliesQueryHookResult = ReturnType<typeof useGoaliesQuery>;
+export type GoaliesLazyQueryHookResult = ReturnType<typeof useGoaliesLazyQuery>;
+export type GoaliesQueryResult = Apollo.QueryResult<GoaliesQuery, GoaliesQueryVariables>;
+export const SkatersDocument = gql`
+    query Skaters($input: SkatersInput!) {
+  skaters(input: $input) {
+    firstName
+    goals
+    lastName
+    playerId
+  }
+}
+    `;
+
+/**
+ * __useSkatersQuery__
+ *
+ * To run a query within a React component, call `useSkatersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSkatersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSkatersQuery({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useSkatersQuery(baseOptions: Apollo.QueryHookOptions<SkatersQuery, SkatersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SkatersQuery, SkatersQueryVariables>(SkatersDocument, options);
+      }
+export function useSkatersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SkatersQuery, SkatersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SkatersQuery, SkatersQueryVariables>(SkatersDocument, options);
+        }
+export type SkatersQueryHookResult = ReturnType<typeof useSkatersQuery>;
+export type SkatersLazyQueryHookResult = ReturnType<typeof useSkatersLazyQuery>;
+export type SkatersQueryResult = Apollo.QueryResult<SkatersQuery, SkatersQueryVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {

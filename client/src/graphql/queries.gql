@@ -32,3 +32,21 @@ query Standings($input: StatisticsInput!) {
     points
   }
 }
+
+query Goalies($input: GoaliesInput!) {
+  goalies(input: $input) {
+    playerId
+    firstName
+    lastName
+    goalsAgainst
+  }
+}
+
+query Skaters($input: SkatersInput!) {
+  skaters(input: $input) {
+    playerId
+    firstName
+    lastName
+    goals
+  }
+}
