@@ -21,10 +21,36 @@ input GameInput {
 }
 
 type Goalie {
+  birthDate: String!
   firstName: String!
+  gamesPlayed: Float!
+  gamesPlayedOnIce: Float!
+  gamesStarted: Float!
   goalsAgainst: Float!
+  goalsAgainstAverage: Float!
+  height: Float!
   lastName: String!
+  losses: Float!
+  minutesInPlay: String!
+  nationality: String!
+  number: Float!
   playerId: String!
+  position: String!
+
+  """Player rank for requested season and sortOrder"""
+  rank: Float!
+  saves: Float!
+  savesPercentage: Float!
+  shotsOnGoal: Float!
+  shutOuts: Float!
+  ties: Float!
+
+  """
+  True if the number of games is enough for the statistics to be correctly calculated
+  """
+  validRanking: Boolean!
+  weight: Float!
+  wins: Float!
 }
 
 input GoaliesInput {
@@ -57,10 +83,38 @@ type Query {
 }
 
 type Skater {
+  assists: Float!
+  birthDate: String!
+  blockedShots: Float!
   firstName: String!
+  gameWinningGoals: Float!
+  gamesPlayed: Float!
   goals: Float!
+  height: Float!
+  hits: Float!
   lastName: String!
+  minus: Float!
+  nationality: String!
+  number: Float!
+  penaltyMinutes: Float!
   playerId: String!
+  plus: Float!
+  plusMinus: Float!
+  position: String!
+  powerPlayGoals: Float!
+
+  """Player rank for requested season and sortOrder"""
+  rank: Float!
+  shotsOnGoal: Float!
+  totalOnIce: String!
+  totalOnIceSeconds: Float!
+  totalPoints: Float!
+
+  """
+  True if the number of games is enough for the statistics to be correctly calculated
+  """
+  validRanking: Boolean!
+  weight: Float!
 }
 
 input SkatersInput {

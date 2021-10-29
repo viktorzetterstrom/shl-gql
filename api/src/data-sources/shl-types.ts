@@ -110,6 +110,7 @@ interface ApiPlayerStatistics {
     height: number;
     last_name: string;
     nationality: string;
+    position: string;
     number: number;
     player_id: number;
     team: {
@@ -123,6 +124,7 @@ interface ApiPlayerStatistics {
 }
 
 interface ApiGoalieStatistics extends ApiPlayerStatistics {
+  gpi: number;
   ga: number;
   gaa: number;
   gs: number;
@@ -134,7 +136,7 @@ interface ApiGoalieStatistics extends ApiPlayerStatistics {
   svsperc: number;
   t: number;
   valid_ranking: boolean;
-  w: string;
+  w: number;
 }
 
 interface ApiSkaterStatistics extends ApiPlayerStatistics {
