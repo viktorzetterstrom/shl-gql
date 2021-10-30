@@ -11,26 +11,16 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav className={styles.root}>
-      <div className={styles.left}>
-        {routes.map((route) => {
-          const routePath = `/${route}`;
-          const isActivePath = routePath === currentPath;
+      {routes.map((route) => {
+        const routePath = `/${route}`;
+        const isActivePath = routePath === currentPath;
 
-          return (
-            <Link key={route} href={routePath}>
-              <a className={clsx(isActivePath ? styles.active : null)}>
-                {route}
-              </a>
-            </Link>
-          );
-        })}
-      </div>
-
-      <div className={styles.right}>
-        <Link href="https://zetterstrom.dev">
-          <a>zetterstrom.dev</a>
-        </Link>
-      </div>
+        return (
+          <Link key={route} href={routePath}>
+            <a className={clsx(isActivePath ? styles.active : null)}>{route}</a>
+          </Link>
+        );
+      })}
     </nav>
   );
 };

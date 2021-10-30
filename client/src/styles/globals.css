@@ -2,6 +2,8 @@
   --bg-color: rgb(230, 230, 230);
   --text-color: rgb(30, 30, 30);
   --highlight-color: rgb(160, 98, 0);
+  --spacing: 8px;
+  --font-size: 12px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,6 +14,13 @@
   }
 }
 
+@media only screen and (min-width: 481px) {
+  :root {
+    --spacing: 16px;
+    --font-size: 16px;
+  }
+}
+
 html,
 body {
   background-color: var(--bg-color);
@@ -19,7 +28,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: monospace;
-  font-size: 16px;
+  font-size: var(--font-size);
 }
 
 a {
