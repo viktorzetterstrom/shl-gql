@@ -12,3 +12,7 @@
 .right > a {
   margin-right: 16px;
 }
+
+.active {
+  color: var(--highlight-color);
+}
