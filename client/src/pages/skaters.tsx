@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { client } from "../graphql/apollo-client";
 import { SkatersDocument, Skater, SkatersQuery } from "../generated/graphql";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 
 interface SkatersProps {
   skaters: SkatersQuery["skaters"];
@@ -43,6 +44,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
       skaters: data.skaters,
     },
   };

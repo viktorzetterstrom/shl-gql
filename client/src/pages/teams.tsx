@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { client } from "../graphql/apollo-client";
 import { Team, TeamsDocument, TeamsQuery } from "../generated/graphql";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 
 interface TeamsProps {
   teams: Team[];
@@ -17,6 +18,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
       teams: data.teams,
     },
   };

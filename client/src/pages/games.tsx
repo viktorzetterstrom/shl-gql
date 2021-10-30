@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { client } from "../graphql/apollo-client";
-import { GamesDocument, Game, GamesQuery } from "../generated/graphql";
+import { GamesDocument, GamesQuery } from "../generated/graphql";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 
 interface GamesProps {
   games: GamesQuery["games"];
@@ -44,6 +45,7 @@ export async function getStaticProps() {
   });
 
   return {
+    revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
       games: data.games,
     },

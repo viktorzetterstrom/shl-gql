@@ -3,6 +3,7 @@ import Image from "next/image";
 import { client } from "../graphql/apollo-client";
 import { StandingsDocument, StandingsQuery } from "../generated/graphql";
 import { StyledTable } from "../components/styled-table";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 
 interface StandingsProps {
   standings: StandingsQuery["standings"];
@@ -63,6 +64,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
       standings: data.standings,
     },
   };
