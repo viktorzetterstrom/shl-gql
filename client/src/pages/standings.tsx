@@ -16,15 +16,15 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => {
       <table>
         <thead>
           <tr>
-            <th>Team</th>
+            <th>team</th>
             <th>3p</th>
             <th>2p</th>
             <th>1p</th>
             <th>0p</th>
-            <th>G</th>
-            <th>GA</th>
+            <th>g</th>
+            <th>ga</th>
             <th>+/-</th>
-            <th>Points</th>
+            <th>points</th>
           </tr>
         </thead>
         <tbody>
