@@ -1,0 +1,14 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 16px;
+  padding-left: 32px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--highlight-color);
+}
+
+.left > a,
+.right > a {
+  margin-right: 16px;
+}
