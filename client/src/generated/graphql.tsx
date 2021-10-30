@@ -35,10 +35,32 @@ export type GameInput = {
 
 export type Goalie = {
   __typename?: 'Goalie';
+  birthDate: Scalars['String'];
   firstName: Scalars['String'];
+  gamesPlayed: Scalars['Float'];
+  gamesPlayedOnIce: Scalars['Float'];
+  gamesStarted: Scalars['Float'];
   goalsAgainst: Scalars['Float'];
+  goalsAgainstAverage: Scalars['Float'];
+  height: Scalars['Float'];
   lastName: Scalars['String'];
+  losses: Scalars['Float'];
+  minutesInPlay: Scalars['String'];
+  nationality: Scalars['String'];
+  number: Scalars['Float'];
   playerId: Scalars['String'];
+  position: Scalars['String'];
+  /** Player rank for requested season and sortOrder */
+  rank: Scalars['Float'];
+  saves: Scalars['Float'];
+  savesPercentage: Scalars['Float'];
+  shotsOnGoal: Scalars['Float'];
+  shutOuts: Scalars['Float'];
+  ties: Scalars['Float'];
+  /** True if the number of games is enough for the statistics to be correctly calculated */
+  validRanking: Scalars['Boolean'];
+  weight: Scalars['Float'];
+  wins: Scalars['Float'];
 };
 
 export type GoaliesInput = {
@@ -113,10 +135,34 @@ export type QueryVideosArgs = {
 
 export type Skater = {
   __typename?: 'Skater';
+  assists: Scalars['Float'];
+  birthDate: Scalars['String'];
+  blockedShots: Scalars['Float'];
   firstName: Scalars['String'];
+  gameWinningGoals: Scalars['Float'];
+  gamesPlayed: Scalars['Float'];
   goals: Scalars['Float'];
+  height: Scalars['Float'];
+  hits: Scalars['Float'];
   lastName: Scalars['String'];
+  minus: Scalars['Float'];
+  nationality: Scalars['String'];
+  number: Scalars['Float'];
+  penaltyMinutes: Scalars['Float'];
   playerId: Scalars['String'];
+  plus: Scalars['Float'];
+  plusMinus: Scalars['Float'];
+  position: Scalars['String'];
+  powerPlayGoals: Scalars['Float'];
+  /** Player rank for requested season and sortOrder */
+  rank: Scalars['Float'];
+  shotsOnGoal: Scalars['Float'];
+  totalOnIce: Scalars['String'];
+  totalOnIceSeconds: Scalars['Float'];
+  totalPoints: Scalars['Float'];
+  /** True if the number of games is enough for the statistics to be correctly calculated */
+  validRanking: Scalars['Boolean'];
+  weight: Scalars['Float'];
 };
 
 export type SkatersInput = {
@@ -193,14 +239,14 @@ export type GoaliesQueryVariables = Exact<{
 }>;
 
 
-export type GoaliesQuery = { __typename?: 'Query', goalies?: Maybe<Array<{ __typename?: 'Goalie', firstName: string, goalsAgainst: number, lastName: string, playerId: string }>> };
+export type GoaliesQuery = { __typename?: 'Query', goalies?: Maybe<Array<{ __typename?: 'Goalie', playerId: string, firstName: string, lastName: string, goalsAgainst: number }>> };
 
 export type SkatersQueryVariables = Exact<{
   input: SkatersInput;
 }>;
 
 
-export type SkatersQuery = { __typename?: 'Query', skaters?: Maybe<Array<{ __typename?: 'Skater', firstName: string, goals: number, lastName: string, playerId: string }>> };
+export type SkatersQuery = { __typename?: 'Query', skaters?: Maybe<Array<{ __typename?: 'Skater', playerId: string, firstName: string, lastName: string, goals: number }>> };
 
 
 export const TeamsDocument = gql`
@@ -327,10 +373,10 @@ export type StandingsQueryResult = Apollo.QueryResult<StandingsQuery, StandingsQ
 export const GoaliesDocument = gql`
     query Goalies($input: GoaliesInput!) {
   goalies(input: $input) {
-    firstName
-    goalsAgainst
-    lastName
     playerId
+    firstName
+    lastName
+    goalsAgainst
   }
 }
     `;
@@ -365,10 +411,10 @@ export type GoaliesQueryResult = Apollo.QueryResult<GoaliesQuery, GoaliesQueryVa
 export const SkatersDocument = gql`
     query Skaters($input: SkatersInput!) {
   skaters(input: $input) {
-    firstName
-    goals
-    lastName
     playerId
+    firstName
+    lastName
+    goals
   }
 }
     `;
