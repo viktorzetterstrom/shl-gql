@@ -2,12 +2,15 @@ import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
 import { StandingsApiResponse } from "../data-sources";
 import { StatisticsInput, StandingsEntry } from "../schemas";
+import { getTeamNameFromTeamCode } from "./utils/getTeamNameFromTeamCode";
 
 const formatStandingsResponse = (
   response: StandingsApiResponse
 ): StandingsEntry[] =>
   response.map((entry) => ({
+    teamId: entry.team.id,
     teamCode: entry.team.code,
+    teamName: getTeamNameFromTeamCode(entry.team_code),
     rank: entry.rank,
     threePoints: entry.reg_w,
     twoPoints: entry.otw + entry.sow,

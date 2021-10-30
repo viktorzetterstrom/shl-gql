@@ -139,6 +139,8 @@ type StandingsEntry {
   points: Float!
   rank: Float!
   teamCode: String!
+  teamId: String!
+  teamName: String!
   threePoints: Float!
   twoPoints: Float!
   zeroPoints: Float!

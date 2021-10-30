@@ -1,6 +1,6 @@
-import styles from "./Layout.module.css";
-import { Navbar } from "./Navbar";
-import { TopBar } from "./TopBar";
+import styles from "./layout.module.css";
+import { Navbar } from "./nav-bar";
+import { TopBar } from "./top-bar";
 
 export const Layout: React.FC = ({ children }) => {
   return (

@@ -1,0 +1,5 @@
+.root {
+  margin-top: var(--spacing);
+  margin-left: calc(var(--spacing) * 2);
+  color: var(--highlight-color);
+}

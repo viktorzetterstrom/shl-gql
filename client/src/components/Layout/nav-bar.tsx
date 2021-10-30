@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/dist/client/router";
 import clsx from "clsx";
 
-import styles from "./Navbar.module.css";
+import styles from "./nav-bar.module.css";
 
 export const Navbar: React.FC = () => {
   const { pathname: currentPath } = useRouter();

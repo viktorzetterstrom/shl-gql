@@ -1,3 +1,5 @@
+import { TeamCode } from "../resolvers/utils/getTeamNameFromTeamCode";
+
 interface ApiArticle {
   article_id: string;
   article_url: string;
@@ -75,7 +77,7 @@ interface ApiTeamFacts {
 }
 
 interface ApiStandingsEntry {
-  team_code: string;
+  team_code: TeamCode;
   gp: number;
   rank: number;
   team: {

@@ -188,6 +188,8 @@ export type StandingsEntry = {
   points: Scalars['Float'];
   rank: Scalars['Float'];
   teamCode: Scalars['String'];
+  teamId: Scalars['String'];
+  teamName: Scalars['String'];
   threePoints: Scalars['Float'];
   twoPoints: Scalars['Float'];
   zeroPoints: Scalars['Float'];
@@ -218,35 +220,35 @@ export type Video = {
 export type TeamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', teamCode: string, golds: string, finals: string, founded: string, holyNumbers?: Maybe<string> }> };
+export type TeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', teamCode: string, golds: string, finals: string, founded: string, holyNumbers?: string | null | undefined }> };
 
 export type GamesQueryVariables = Exact<{
   input: StatisticsInput;
 }>;
 
 
-export type GamesQuery = { __typename?: 'Query', games?: Maybe<Array<{ __typename?: 'Game', gameId: string, time: string, away: string, home: string, result: string }>> };
+export type GamesQuery = { __typename?: 'Query', games?: Array<{ __typename?: 'Game', gameId: string, time: string, away: string, home: string, result: string }> | null | undefined };
 
 export type StandingsQueryVariables = Exact<{
   input: StatisticsInput;
 }>;
 
 
-export type StandingsQuery = { __typename?: 'Query', standings?: Maybe<Array<{ __typename?: 'StandingsEntry', teamCode: string, goals: number, goalsAgainst: number, onePoints: number, plusMinus: number, rank: number, threePoints: number, twoPoints: number, zeroPoints: number, points: number }>> };
+export type StandingsQuery = { __typename?: 'Query', standings?: Array<{ __typename?: 'StandingsEntry', teamId: string, teamCode: string, teamName: string, goals: number, goalsAgainst: number, onePoints: number, plusMinus: number, rank: number, threePoints: number, twoPoints: number, zeroPoints: number, points: number }> | null | undefined };
 
 export type GoaliesQueryVariables = Exact<{
   input: GoaliesInput;
 }>;
 
 
-export type GoaliesQuery = { __typename?: 'Query', goalies?: Maybe<Array<{ __typename?: 'Goalie', playerId: string, firstName: string, lastName: string, goalsAgainst: number }>> };
+export type GoaliesQuery = { __typename?: 'Query', goalies?: Array<{ __typename?: 'Goalie', playerId: string, firstName: string, lastName: string, goalsAgainst: number }> | null | undefined };
 
 export type SkatersQueryVariables = Exact<{
   input: SkatersInput;
 }>;
 
 
-export type SkatersQuery = { __typename?: 'Query', skaters?: Maybe<Array<{ __typename?: 'Skater', playerId: string, firstName: string, lastName: string, goals: number }>> };
+export type SkatersQuery = { __typename?: 'Query', skaters?: Array<{ __typename?: 'Skater', playerId: string, firstName: string, lastName: string, goals: number }> | null | undefined };
 
 
 export const TeamsDocument = gql`
@@ -329,7 +331,9 @@ export type GamesQueryResult = Apollo.QueryResult<GamesQuery, GamesQueryVariable
 export const StandingsDocument = gql`
     query Standings($input: StatisticsInput!) {
   standings(input: $input) {
+    teamId
     teamCode
+    teamName
     goals
     goalsAgainst
     onePoints
