@@ -10,7 +10,7 @@ const formatArticlesApiResponse = (response: ArticlesApiResponse): Article[] =>
 
 @Resolver(() => Article)
 export class ArticlesResolver {
-  @Query(() => [Article])
+  @Query(() => [Article], { nullable: true })
   async articles(
     @Arg("input", { nullable: true }) input: TeamInput,
     @Ctx() context: Context

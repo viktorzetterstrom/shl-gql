@@ -23,11 +23,18 @@ export type Game = {
   __typename?: 'Game';
   awayTeamCode: Scalars['String'];
   awayTeamName: Scalars['String'];
+  date: Scalars['String'];
   gameId: Scalars['String'];
   homeTeamCode: Scalars['String'];
   homeTeamName: Scalars['String'];
   result: Scalars['String'];
   time: Scalars['String'];
+};
+
+export type GameDay = {
+  __typename?: 'GameDay';
+  date: Scalars['String'];
+  games: Array<Game>;
 };
 
 export type GameInput = {
@@ -86,6 +93,7 @@ export type Query = {
   __typename?: 'Query';
   articles: Array<Article>;
   game?: Maybe<Game>;
+  gameDays?: Maybe<Array<GameDay>>;
   games?: Maybe<Array<Game>>;
   goalies?: Maybe<Array<Goalie>>;
   skaters?: Maybe<Array<Skater>>;
@@ -103,6 +111,11 @@ export type QueryArticlesArgs = {
 
 export type QueryGameArgs = {
   input: GameInput;
+};
+
+
+export type QueryGameDaysArgs = {
+  input: StatisticsInput;
 };
 
 
@@ -224,12 +237,12 @@ export type TeamsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TeamsQuery = { __typename?: 'Query', teams: Array<{ __typename?: 'Team', teamCode: string, golds: string, finals: string, founded: string, holyNumbers?: string | null | undefined }> };
 
-export type GamesQueryVariables = Exact<{
+export type GameDaysQueryVariables = Exact<{
   input: StatisticsInput;
 }>;
 
 
-export type GamesQuery = { __typename?: 'Query', games?: Array<{ __typename?: 'Game', gameId: string, time: string, awayTeamCode: string, awayTeamName: string, homeTeamCode: string, homeTeamName: string, result: string }> | null | undefined };
+export type GameDaysQuery = { __typename?: 'Query', gameDays?: Array<{ __typename?: 'GameDay', date: string, games: Array<{ __typename?: 'Game', gameId: string, time: string, homeTeamCode: string, homeTeamName: string, awayTeamCode: string, awayTeamName: string, result: string }> }> | null | undefined };
 
 export type StandingsQueryVariables = Exact<{
   input: StatisticsInput;
@@ -291,47 +304,50 @@ export function useTeamsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Team
 export type TeamsQueryHookResult = ReturnType<typeof useTeamsQuery>;
 export type TeamsLazyQueryHookResult = ReturnType<typeof useTeamsLazyQuery>;
 export type TeamsQueryResult = Apollo.QueryResult<TeamsQuery, TeamsQueryVariables>;
-export const GamesDocument = gql`
-    query Games($input: StatisticsInput!) {
-  games(input: $input) {
-    gameId
-    time
-    awayTeamCode
-    awayTeamName
-    homeTeamCode
-    homeTeamName
-    result
+export const GameDaysDocument = gql`
+    query GameDays($input: StatisticsInput!) {
+  gameDays(input: $input) {
+    date
+    games {
+      gameId
+      time
+      homeTeamCode
+      homeTeamName
+      awayTeamCode
+      awayTeamName
+      result
+    }
   }
 }
     `;
 
 /**
- * __useGamesQuery__
+ * __useGameDaysQuery__
  *
- * To run a query within a React component, call `useGamesQuery` and pass it any options that fit your needs.
- * When your component renders, `useGamesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGameDaysQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGameDaysQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useGamesQuery({
+ * const { data, loading, error } = useGameDaysQuery({
  *   variables: {
  *      input: // value for 'input'
  *   },
  * });
  */
-export function useGamesQuery(baseOptions: Apollo.QueryHookOptions<GamesQuery, GamesQueryVariables>) {
+export function useGameDaysQuery(baseOptions: Apollo.QueryHookOptions<GameDaysQuery, GameDaysQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<GamesQuery, GamesQueryVariables>(GamesDocument, options);
+        return Apollo.useQuery<GameDaysQuery, GameDaysQueryVariables>(GameDaysDocument, options);
       }
-export function useGamesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GamesQuery, GamesQueryVariables>) {
+export function useGameDaysLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GameDaysQuery, GameDaysQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<GamesQuery, GamesQueryVariables>(GamesDocument, options);
+          return Apollo.useLazyQuery<GameDaysQuery, GameDaysQueryVariables>(GameDaysDocument, options);
         }
-export type GamesQueryHookResult = ReturnType<typeof useGamesQuery>;
-export type GamesLazyQueryHookResult = ReturnType<typeof useGamesLazyQuery>;
-export type GamesQueryResult = Apollo.QueryResult<GamesQuery, GamesQueryVariables>;
+export type GameDaysQueryHookResult = ReturnType<typeof useGameDaysQuery>;
+export type GameDaysLazyQueryHookResult = ReturnType<typeof useGameDaysLazyQuery>;
+export type GameDaysQueryResult = Apollo.QueryResult<GameDaysQuery, GameDaysQueryVariables>;
 export const StandingsDocument = gql`
     query Standings($input: StatisticsInput!) {
   standings(input: $input) {

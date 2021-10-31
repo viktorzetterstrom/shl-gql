@@ -1,62 +1,66 @@
 import type { NextPage } from "next";
+import { sub as subtractFromDate, add as addToDate } from "date-fns";
 import Image from "next/image";
 import { client } from "../graphql/apollo-client";
-import { format } from "date-fns";
-import { GamesDocument, GamesQuery } from "../generated/graphql";
+import { GameDaysDocument, GameDaysQuery } from "../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { StyledTable } from "../components/styled-table";
-import { useMediaQuery } from "../utils/useMediaQuery";
+import React from "react";
 
 interface GamesProps {
-  games: GamesQuery["games"];
+  gameDays: GameDaysQuery["gameDays"];
 }
 
-const formatGameTime = (gameTimeString: string) =>
-  format(new Date(gameTimeString), "dd-LLL HH:mm").toLowerCase();
-
-const Games: NextPage<GamesProps> = ({ games }) => {
-  const isSmallScreen = useMediaQuery("(min-width: 420px)");
-
+const Games: NextPage<GamesProps> = ({ gameDays }) => {
   return (
     <div>
       <StyledTable>
-        <thead>
-          <tr>
-            <th>time</th>
-            <th colSpan={3}>teams</th>
-            <th>result</th>
-          </tr>
-        </thead>
         <tbody>
-          {games?.map((game) => (
-            <tr key={game.gameId}>
-              <td>{formatGameTime(game.time)}</td>
-              <td style={{ textAlign: "right" }}>
-                {`${game.homeTeamName} `}
-                {isSmallScreen && (
-                  <Image
-                    alt={`${game.homeTeamName} logo`}
-                    src={`/img/${game.homeTeamCode}-30.png`}
-                    width="15"
-                    height="15"
-                  />
-                )}
-              </td>
-              <td>&nbsp;-&nbsp;</td>
-              <td style={{ textAlign: "left" }}>
-                {isSmallScreen && (
-                  <Image
-                    alt={`${game.awayTeamName} logo`}
-                    src={`/img/${game.awayTeamCode}-30.png`}
-                    width="15"
-                    height="15"
-                  />
-                )}
-                {` ${game.awayTeamName}`}
-              </td>
-              <td>{game.result}</td>
-            </tr>
-          ))}
+          {gameDays
+            ?.filter((gameDay) => {
+              const twoWeeksAgo = subtractFromDate(new Date(), { weeks: 2 });
+              const twoWeeksFromNow = addToDate(new Date(), { weeks: 2 });
+              const gameDate = new Date(gameDay.date);
+
+              return twoWeeksAgo < gameDate && gameDate < twoWeeksFromNow;
+            })
+            .map(({ date, games }) => (
+              <React.Fragment key={date}>
+                <tr>
+                  <td colSpan={5} style={{ textAlign: "center" }}>
+                    {date}
+                  </td>
+                </tr>
+                {games?.map((game) => (
+                  <tr key={game.gameId}>
+                    <td>{game.time}</td>
+                    <td style={{ textAlign: "right" }}>
+                      {`${game.homeTeamName} `}
+                      <Image
+                        alt={`${game.homeTeamName} logo`}
+                        src={`/img/${game.homeTeamCode}-30.png`}
+                        width="15"
+                        height="15"
+                      />
+                    </td>
+                    <td>&nbsp;-&nbsp;</td>
+                    <td style={{ textAlign: "left" }}>
+                      <Image
+                        alt={`${game.awayTeamName} logo`}
+                        src={`/img/${game.awayTeamCode}-30.png`}
+                        width="15"
+                        height="15"
+                      />
+                      {` ${game.awayTeamName}`}
+                    </td>
+                    <td>{game.result}</td>
+                  </tr>
+                ))}
+                <tr>
+                  <td colSpan={5} />
+                </tr>
+              </React.Fragment>
+            ))}
         </tbody>
       </StyledTable>
     </div>
@@ -64,8 +68,8 @@ const Games: NextPage<GamesProps> = ({ games }) => {
 };
 
 export async function getStaticProps() {
-  const { data } = await client.query<GamesQuery>({
-    query: GamesDocument,
+  const { data } = await client.query<GameDaysQuery>({
+    query: GameDaysDocument,
     variables: {
       input: {
         year: "2021",
@@ -76,7 +80,7 @@ export async function getStaticProps() {
   return {
     revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
-      games: data.games,
+      gameDays: data.gameDays,
     },
   };
 }

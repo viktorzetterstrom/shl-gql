@@ -1,12 +1,15 @@
 import { Query, Resolver, Arg, Ctx } from "type-graphql";
+import { format as formatDate } from "date-fns";
 import { Context } from "..";
 import { GameApiResponse, GamesApiResponse } from "../data-sources";
 import { Game, GameInput, StatisticsInput } from "../schemas";
+import { GameDay } from "../schemas/game-day";
 import { getTeamNameFromTeamCode } from "./utils/getTeamNameFromTeamCode";
 
 const formatGameApiResponse = (response: GameApiResponse): Game => ({
   gameId: String(response.game_id),
-  time: response.start_date_time,
+  date: formatDate(new Date(response.start_date_time), "yyyy-MM-dd"),
+  time: formatDate(new Date(response.start_date_time), "HH:mm"),
   homeTeamCode: response.home_team_code,
   homeTeamName: getTeamNameFromTeamCode(response.home_team_code),
   awayTeamCode: response.away_team_code,
@@ -15,15 +18,19 @@ const formatGameApiResponse = (response: GameApiResponse): Game => ({
 });
 
 const formatGamesApiResponse = (response: GamesApiResponse): Game[] =>
-  response.map((game) => ({
-    gameId: String(game.game_id),
-    time: game.start_date_time,
-    homeTeamCode: game.home_team_code,
-    homeTeamName: getTeamNameFromTeamCode(game.home_team_code),
-    awayTeamCode: game.away_team_code,
-    awayTeamName: getTeamNameFromTeamCode(game.away_team_code),
-    result: `${game.home_team_result} - ${game.away_team_result}`,
-  }));
+  response.map(formatGameApiResponse);
+
+const formatGameDayApiResponse = (response: GamesApiResponse): GameDay[] => {
+  const days = response.map(formatGameApiResponse).reduce(
+    (acc, curr) => ({
+      ...acc,
+      [curr.date]: acc[curr.date] ? [...acc[curr.date], curr] : [curr],
+    }),
+    {} as { [date: string]: Game[] }
+  );
+
+  return Object.entries(days).map(([date, games]) => ({ date, games }));
+};
 
 @Resolver(() => Game)
 export class GamesResolver {
@@ -45,5 +52,18 @@ export class GamesResolver {
     const response = await context.dataSources.shl.season(year).games();
 
     return formatGamesApiResponse(response);
+  }
+}
+
+@Resolver(() => GameDay)
+export class GameDaysResolver {
+  @Query(() => [GameDay], { nullable: true })
+  async gameDays(
+    @Arg("input") { year }: StatisticsInput,
+    @Ctx() context: Context
+  ): Promise<GameDay[]> {
+    const response = await context.dataSources.shl.season(year).games();
+
+    return formatGameDayApiResponse(response);
   }
 }

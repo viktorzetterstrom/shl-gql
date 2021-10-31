@@ -6,6 +6,9 @@ export class Game {
   gameId!: string;
 
   @Field()
+  date!: string;
+
+  @Field()
   time!: string;
 
   @Field()

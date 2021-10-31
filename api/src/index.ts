@@ -15,6 +15,7 @@ import {
   StandingsResolver,
   TeamsResolver,
   VideosResolver,
+  GameDaysResolver,
 } from "./resolvers";
 
 export interface Context {
@@ -33,6 +34,7 @@ const main = async () => {
       StandingsResolver,
       TeamsResolver,
       VideosResolver,
+      GameDaysResolver,
     ],
     emitSchemaFile: true,
   });

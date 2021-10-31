@@ -8,15 +8,18 @@ query Teams {
   }
 }
 
-query Games($input: StatisticsInput!) {
-  games(input: $input) {
-    gameId
-    time
-    awayTeamCode
-    awayTeamName
-    homeTeamCode
-    homeTeamName
-    result
+query GameDays($input: StatisticsInput!) {
+  gameDays(input: $input) {
+    date
+    games {
+      gameId
+      time
+      homeTeamCode
+      homeTeamName
+      awayTeamCode
+      awayTeamName
+      result
+    }
   }
 }
 

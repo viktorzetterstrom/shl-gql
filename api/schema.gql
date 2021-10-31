@@ -10,11 +10,17 @@ type Article {
 type Game {
   awayTeamCode: String!
   awayTeamName: String!
+  date: String!
   gameId: String!
   homeTeamCode: String!
   homeTeamName: String!
   result: String!
   time: String!
+}
+
+type GameDay {
+  date: String!
+  games: [Game!]!
 }
 
 input GameInput {
@@ -73,8 +79,9 @@ enum GoaliesSortOrder {
 }
 
 type Query {
-  articles(input: TeamInput): [Article!]!
+  articles(input: TeamInput): [Article!]
   game(input: GameInput!): Game
+  gameDays(input: StatisticsInput!): [GameDay!]
   games(input: StatisticsInput!): [Game!]
   goalies(input: GoaliesInput!): [Goalie!]
   skaters(input: SkatersInput!): [Skater!]
