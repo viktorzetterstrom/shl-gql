@@ -59,7 +59,23 @@
         "description": null,
         "fields": [
           {
-            "name": "away",
+            "name": "awayTeamCode",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "awayTeamName",
             "description": null,
             "args": [],
             "type": {
@@ -91,7 +107,23 @@
             "deprecationReason": null
           },
           {
-            "name": "home",
+            "name": "homeTeamCode",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "homeTeamName",
             "description": null,
             "args": [],
             "type": {

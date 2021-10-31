@@ -21,9 +21,11 @@ export type Article = {
 
 export type Game = {
   __typename?: 'Game';
-  away: Scalars['String'];
+  awayTeamCode: Scalars['String'];
+  awayTeamName: Scalars['String'];
   gameId: Scalars['String'];
-  home: Scalars['String'];
+  homeTeamCode: Scalars['String'];
+  homeTeamName: Scalars['String'];
   result: Scalars['String'];
   time: Scalars['String'];
 };
@@ -227,7 +229,7 @@ export type GamesQueryVariables = Exact<{
 }>;
 
 
-export type GamesQuery = { __typename?: 'Query', games?: Array<{ __typename?: 'Game', gameId: string, time: string, away: string, home: string, result: string }> | null | undefined };
+export type GamesQuery = { __typename?: 'Query', games?: Array<{ __typename?: 'Game', gameId: string, time: string, awayTeamCode: string, awayTeamName: string, homeTeamCode: string, homeTeamName: string, result: string }> | null | undefined };
 
 export type StandingsQueryVariables = Exact<{
   input: StatisticsInput;
@@ -294,8 +296,10 @@ export const GamesDocument = gql`
   games(input: $input) {
     gameId
     time
-    away
-    home
+    awayTeamCode
+    awayTeamName
+    homeTeamCode
+    homeTeamName
     result
   }
 }

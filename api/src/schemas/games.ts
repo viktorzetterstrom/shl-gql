@@ -9,10 +9,16 @@ export class Game {
   time!: string;
 
   @Field()
-  home!: string;
+  homeTeamCode!: string;
 
   @Field()
-  away!: string;
+  homeTeamName!: string;
+
+  @Field()
+  awayTeamCode!: string;
+
+  @Field()
+  awayTeamName!: string;
 
   @Field()
   result!: string;

@@ -14,7 +14,7 @@ interface ApiArticle {
 }
 interface ApiGame {
   game_id: number;
-  away_team_code: string;
+  away_team_code: TeamCode;
   away_team_result: number;
   game_center_active: boolean;
   game_center_url_desktop: string;
@@ -22,7 +22,7 @@ interface ApiGame {
   game_type: string;
   game_uuid: string;
   highlights_coverage_enabled: number;
-  home_team_code: string;
+  home_team_code: TeamCode;
   home_team_result: number;
   live_coverage_enabled: number;
   overtime: number;

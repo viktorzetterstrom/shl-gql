@@ -12,8 +12,10 @@ query Games($input: StatisticsInput!) {
   games(input: $input) {
     gameId
     time
-    away
-    home
+    awayTeamCode
+    awayTeamName
+    homeTeamCode
+    homeTeamName
     result
   }
 }

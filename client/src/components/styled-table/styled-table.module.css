@@ -1,5 +1,6 @@
 .table {
   width: 100%;
+  max-width: 520px;
 }
 
 .table tbody tr td {
@@ -8,10 +9,4 @@
 
 .table tbody tr td:first-child {
   text-align: left;
-}
-
-@media only screen and (min-width: 481px) {
-  .table {
-    width: 450px;
-  }
 }

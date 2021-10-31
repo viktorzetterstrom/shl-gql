@@ -1,5 +1,5 @@
 .root {
   margin-top: var(--spacing);
-  margin-left: calc(var(--spacing) * 2);
+  margin-left: var(--spacing);
   color: var(--highlight-color);
 }

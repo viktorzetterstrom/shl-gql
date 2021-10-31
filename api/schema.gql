@@ -8,9 +8,11 @@ type Article {
 }
 
 type Game {
-  away: String!
+  awayTeamCode: String!
+  awayTeamName: String!
   gameId: String!
-  home: String!
+  homeTeamCode: String!
+  homeTeamName: String!
   result: String!
   time: String!
 }
