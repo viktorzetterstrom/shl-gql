@@ -1,12 +1,11 @@
 import styles from "./layout.module.css";
-import { Navbar } from "./nav-bar";
-import { TopBar } from "./top-bar";
+import { NavBar, TopBar } from "./components";
 
 export const Layout: React.FC = ({ children }) => {
   return (
     <div>
       <TopBar />
-      <Navbar />
+      <NavBar />
       <div className={styles.content}>{children}</div>
     </div>
   );

@@ -1,7 +1,8 @@
-import type { NextPage } from "next";
-import { client } from "../graphql/apollo-client";
-import { GoaliesDocument, Goalie, GoaliesQuery } from "../generated/graphql";
-import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { client } from "../../graphql/apollo-client";
+import { GoaliesDocument, Goalie, GoaliesQuery } from "../../generated/graphql";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
+import { ACTIVE_SEASON } from "../../config/active-season";
 
 interface GoaliesProps {
   goalies: GoaliesQuery["goalies"];
@@ -32,12 +33,19 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
   );
 };
 
-export async function getStaticProps() {
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [{ params: { year: ACTIVE_SEASON } }],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await client.query<GoaliesQuery>({
     query: GoaliesDocument,
     variables: {
       input: {
-        year: "2021",
+        year: params?.year,
       },
     },
   });
@@ -48,6 +56,6 @@ export async function getStaticProps() {
       goalies: data.goalies,
     },
   };
-}
+};
 
 export default Goalies;

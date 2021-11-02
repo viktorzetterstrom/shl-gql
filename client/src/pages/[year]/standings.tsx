@@ -1,9 +1,10 @@
-import type { NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
-import { client } from "../graphql/apollo-client";
-import { StandingsDocument, StandingsQuery } from "../generated/graphql";
-import { StyledTable } from "../components/styled-table";
-import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
+import { client } from "../../graphql/apollo-client";
+import { StandingsDocument, StandingsQuery } from "../../generated/graphql";
+import { StyledTable } from "../../components/styled-table";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
+import { ACTIVE_SEASON } from "../../config/active-season";
 
 interface StandingsProps {
   standings: StandingsQuery["standings"];
@@ -52,12 +53,19 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => (
   </div>
 );
 
-export async function getStaticProps() {
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [{ params: { year: ACTIVE_SEASON } }],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await client.query<StandingsQuery>({
     query: StandingsDocument,
     variables: {
       input: {
-        year: "2021",
+        year: params?.year,
       },
     },
   });
@@ -68,6 +76,6 @@ export async function getStaticProps() {
       standings: data.standings,
     },
   };
-}
+};
 
 export default Standings;

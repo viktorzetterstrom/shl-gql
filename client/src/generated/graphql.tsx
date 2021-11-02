@@ -91,7 +91,7 @@ export enum GoaliesSortOrder {
 
 export type Query = {
   __typename?: 'Query';
-  articles: Array<Article>;
+  articles?: Maybe<Array<Article>>;
   game?: Maybe<Game>;
   gameDays?: Maybe<Array<GameDay>>;
   games?: Maybe<Array<Game>>;
@@ -242,7 +242,7 @@ export type GameDaysQueryVariables = Exact<{
 }>;
 
 
-export type GameDaysQuery = { __typename?: 'Query', gameDays?: Array<{ __typename?: 'GameDay', date: string, games: Array<{ __typename?: 'Game', gameId: string, time: string, homeTeamCode: string, homeTeamName: string, awayTeamCode: string, awayTeamName: string, result: string }> }> | null | undefined };
+export type GameDaysQuery = { __typename?: 'Query', gameDays?: Array<{ __typename?: 'GameDay', date: string, games: Array<{ __typename?: 'Game', gameId: string, time: string, date: string, homeTeamCode: string, homeTeamName: string, awayTeamCode: string, awayTeamName: string, result: string }> }> | null | undefined };
 
 export type StandingsQueryVariables = Exact<{
   input: StatisticsInput;
@@ -311,6 +311,7 @@ export const GameDaysDocument = gql`
     games {
       gameId
       time
+      date
       homeTeamCode
       homeTeamName
       awayTeamCode
