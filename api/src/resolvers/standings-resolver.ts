@@ -12,6 +12,7 @@ const formatStandingsResponse = (
     teamCode: entry.team.code,
     teamName: getTeamNameFromTeamCode(entry.team_code),
     rank: entry.rank,
+    gamesPlayed: entry.gp,
     threePoints: entry.reg_w,
     twoPoints: entry.otw + entry.sow,
     onePoints: entry.otl + entry.sol,

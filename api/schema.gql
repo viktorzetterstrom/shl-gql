@@ -141,6 +141,7 @@ enum SkatersSortOrder {
 }
 
 type StandingsEntry {
+  gamesPlayed: Float!
   goals: Float!
   goalsAgainst: Float!
   onePoints: Float!

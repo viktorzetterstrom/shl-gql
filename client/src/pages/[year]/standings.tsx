@@ -16,6 +16,7 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => (
       <thead>
         <tr>
           <th>team</th>
+          <th>gp</th>
           <th>3p</th>
           <th>2p</th>
           <th>1p</th>
@@ -38,6 +39,7 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => (
               />{" "}
               {entry.teamName.toLowerCase()}
             </td>
+            <td>{entry.gamesPlayed}</td>
             <td>{entry.threePoints}</td>
             <td>{entry.twoPoints}</td>
             <td>{entry.onePoints}</td>

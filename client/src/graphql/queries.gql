@@ -34,6 +34,7 @@ query Standings($input: StatisticsInput!) {
     onePoints
     plusMinus
     rank
+    gamesPlayed
     threePoints
     twoPoints
     zeroPoints

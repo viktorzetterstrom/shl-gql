@@ -15,6 +15,9 @@ export class StandingsEntry {
   rank!: number;
 
   @Field()
+  gamesPlayed!: number;
+
+  @Field()
   threePoints!: number;
 
   @Field()
