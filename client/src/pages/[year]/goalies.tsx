@@ -15,7 +15,6 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
       <table>
         <thead>
           <tr>
-            <th />
             <th>name</th>
             <th>gp</th>
             <th>so</th>
@@ -26,13 +25,15 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
         <tbody>
           {goalies?.map((goalie) => (
             <tr key={goalie.playerId}>
-              <Image
-                alt={`${goalie.teamCode} logo`}
-                src={`/img/${goalie.teamCode}-30.png`}
-                width="15"
-                height="15"
-              />{" "}
-              <td>{`${goalie.firstName.toLowerCase()} ${goalie.lastName.toLowerCase()}`}</td>
+              <td>
+                <Image
+                  alt={`${goalie.teamCode} logo`}
+                  src={`/img/${goalie.teamCode}-30.png`}
+                  width="15"
+                  height="15"
+                />
+                {` ${goalie.firstName.toLowerCase()} ${goalie.lastName.toLowerCase()}`}
+              </td>
               <td>{goalie.gamesPlayedOnIce}</td>
               <td>{goalie.shutOuts}</td>
               <td>{goalie.goalsAgainstAverage.toFixed(2)}</td>

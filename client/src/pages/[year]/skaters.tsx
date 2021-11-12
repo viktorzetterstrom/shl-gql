@@ -15,7 +15,6 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
       <table>
         <thead>
           <tr>
-            <th />
             <th>name</th>
             <th>gp</th>
             <th>+/-</th>
@@ -27,13 +26,15 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
         <tbody>
           {skaters?.map((skater) => (
             <tr key={skater.playerId}>
-              <Image
-                alt={`${skater.teamCode} logo`}
-                src={`/img/${skater.teamCode}-30.png`}
-                width="15"
-                height="15"
-              />{" "}
-              <td>{`${skater.firstName.toLowerCase()} ${skater.lastName.toLowerCase()}`}</td>
+              <td>
+                <Image
+                  alt={`${skater.teamCode} logo`}
+                  src={`/img/${skater.teamCode}-30.png`}
+                  width="15"
+                  height="15"
+                />
+                {` ${skater.firstName.toLowerCase()} ${skater.lastName.toLowerCase()}`}
+              </td>
               <td>{skater.gamesPlayed}</td>
               <td>{skater.plusMinus}</td>
               <td>{skater.assists}</td>
