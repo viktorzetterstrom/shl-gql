@@ -65,6 +65,7 @@ export type Goalie = {
   savesPercentage: Scalars['Float'];
   shotsOnGoal: Scalars['Float'];
   shutOuts: Scalars['Float'];
+  teamCode: Scalars['String'];
   ties: Scalars['Float'];
   /** True if the number of games is enough for the statistics to be correctly calculated */
   validRanking: Scalars['Boolean'];
@@ -172,6 +173,7 @@ export type Skater = {
   /** Player rank for requested season and sortOrder */
   rank: Scalars['Float'];
   shotsOnGoal: Scalars['Float'];
+  teamCode: Scalars['String'];
   totalOnIce: Scalars['String'];
   totalOnIceSeconds: Scalars['Float'];
   totalPoints: Scalars['Float'];
@@ -257,14 +259,14 @@ export type GoaliesQueryVariables = Exact<{
 }>;
 
 
-export type GoaliesQuery = { __typename?: 'Query', goalies?: Array<{ __typename?: 'Goalie', playerId: string, firstName: string, lastName: string, gamesPlayedOnIce: number, goalsAgainstAverage: number, shutOuts: number, savesPercentage: number }> | null | undefined };
+export type GoaliesQuery = { __typename?: 'Query', goalies?: Array<{ __typename?: 'Goalie', playerId: string, teamCode: string, firstName: string, lastName: string, gamesPlayedOnIce: number, goalsAgainstAverage: number, shutOuts: number, savesPercentage: number }> | null | undefined };
 
 export type SkatersQueryVariables = Exact<{
   input: SkatersInput;
 }>;
 
 
-export type SkatersQuery = { __typename?: 'Query', skaters?: Array<{ __typename?: 'Skater', playerId: string, firstName: string, lastName: string, goals: number, assists: number, gamesPlayed: number, plusMinus: number, totalPoints: number }> | null | undefined };
+export type SkatersQuery = { __typename?: 'Query', skaters?: Array<{ __typename?: 'Skater', playerId: string, teamCode: string, firstName: string, lastName: string, goals: number, assists: number, gamesPlayed: number, plusMinus: number, totalPoints: number }> | null | undefined };
 
 
 export const TeamsDocument = gql`
@@ -401,6 +403,7 @@ export const GoaliesDocument = gql`
     query Goalies($input: GoaliesInput!) {
   goalies(input: $input) {
     playerId
+    teamCode
     firstName
     lastName
     gamesPlayedOnIce
@@ -442,6 +445,7 @@ export const SkatersDocument = gql`
     query Skaters($input: SkatersInput!) {
   skaters(input: $input) {
     playerId
+    teamCode
     firstName
     lastName
     goals

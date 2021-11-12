@@ -45,6 +45,7 @@ query Standings($input: StatisticsInput!) {
 query Goalies($input: GoaliesInput!) {
   goalies(input: $input) {
     playerId
+    teamCode
     firstName
     lastName
     gamesPlayedOnIce
@@ -57,6 +58,7 @@ query Goalies($input: GoaliesInput!) {
 query Skaters($input: SkatersInput!) {
   skaters(input: $input) {
     playerId
+    teamCode
     firstName
     lastName
     goals

@@ -1,4 +1,5 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import Image from "next/image";
 import { client } from "../../graphql/apollo-client";
 import { SkatersDocument, Skater, SkatersQuery } from "../../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
@@ -14,6 +15,7 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
       <table>
         <thead>
           <tr>
+            <th />
             <th>name</th>
             <th>gp</th>
             <th>+/-</th>
@@ -25,6 +27,12 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
         <tbody>
           {skaters?.map((skater) => (
             <tr key={skater.playerId}>
+              <Image
+                alt={`${skater.teamCode} logo`}
+                src={`/img/${skater.teamCode}-30.png`}
+                width="15"
+                height="15"
+              />{" "}
               <td>{`${skater.firstName.toLowerCase()} ${skater.lastName.toLowerCase()}`}</td>
               <td>{skater.gamesPlayed}</td>
               <td>{skater.plusMinus}</td>
