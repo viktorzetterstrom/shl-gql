@@ -4,6 +4,7 @@ import { client } from "../../graphql/apollo-client";
 import { SkatersDocument, Skater, SkatersQuery } from "../../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../../config/active-season";
+import { StyledTable } from "../../components/styled-table";
 
 interface SkatersProps {
   skaters: SkatersQuery["skaters"];
@@ -12,7 +13,7 @@ interface SkatersProps {
 const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
   return (
     <div>
-      <table>
+      <StyledTable>
         <thead>
           <tr>
             <th>name</th>
@@ -43,7 +44,7 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </StyledTable>
     </div>
   );
 };

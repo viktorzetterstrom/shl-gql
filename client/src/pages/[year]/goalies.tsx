@@ -4,6 +4,7 @@ import { client } from "../../graphql/apollo-client";
 import { GoaliesDocument, Goalie, GoaliesQuery } from "../../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../../config/active-season";
+import { StyledTable } from "../../components/styled-table";
 
 interface GoaliesProps {
   goalies: GoaliesQuery["goalies"];
@@ -12,7 +13,7 @@ interface GoaliesProps {
 const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
   return (
     <div>
-      <table>
+      <StyledTable>
         <thead>
           <tr>
             <th>name</th>
@@ -37,11 +38,11 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
               <td>{goalie.gamesPlayedOnIce}</td>
               <td>{goalie.shutOuts}</td>
               <td>{goalie.goalsAgainstAverage.toFixed(2)}</td>
-              <td>{`${goalie.savesPercentage.toFixed(1)}%`}</td>
+              <td>{`${goalie.savesPercentage.toFixed(2)}`}</td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </StyledTable>
     </div>
   );
 };
