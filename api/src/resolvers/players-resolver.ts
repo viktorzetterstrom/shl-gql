@@ -7,6 +7,7 @@ const formatGoaliesApiResponse = (response: GoalieApiResponse): Goalie[] =>
   response.map((goalie) => ({
     // General information
     playerId: goalie.player_id,
+    teamCode: goalie.info.team_code,
     firstName: goalie.info.first_name,
     lastName: goalie.info.last_name,
     position: "G",
@@ -38,6 +39,7 @@ const formatSkatersApiResponse = (response: SkaterApiResponse): Skater[] =>
   response.map((skater) => ({
     // General information
     playerId: skater.player_id,
+    teamCode: skater.info.team_code,
     firstName: skater.info.first_name,
     lastName: skater.info.last_name,
     position: skater.info.position,

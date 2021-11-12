@@ -6,6 +6,9 @@ class Player {
   playerId!: string;
 
   @Field()
+  teamCode!: string;
+
+  @Field()
   firstName!: string;
 
   @Field()

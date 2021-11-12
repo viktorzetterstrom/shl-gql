@@ -51,6 +51,7 @@ type Goalie {
   savesPercentage: Float!
   shotsOnGoal: Float!
   shutOuts: Float!
+  teamCode: String!
   ties: Float!
 
   """
@@ -115,6 +116,7 @@ type Skater {
   """Player rank for requested season and sortOrder"""
   rank: Float!
   shotsOnGoal: Float!
+  teamCode: String!
   totalOnIce: String!
   totalOnIceSeconds: Float!
   totalPoints: Float!
