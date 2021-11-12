@@ -47,7 +47,10 @@ query Goalies($input: GoaliesInput!) {
     playerId
     firstName
     lastName
-    goalsAgainst
+    gamesPlayedOnIce
+    goalsAgainstAverage
+    shutOuts
+    savesPercentage
   }
 }
 
@@ -57,5 +60,9 @@ query Skaters($input: SkatersInput!) {
     firstName
     lastName
     goals
+    assists
+    gamesPlayed
+    plusMinus
+    totalPoints
   }
 }

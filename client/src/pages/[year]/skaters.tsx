@@ -14,17 +14,23 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
       <table>
         <thead>
           <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Goals</th>
+            <th>name</th>
+            <th>gp</th>
+            <th>+/-</th>
+            <th>a</th>
+            <th>g</th>
+            <th>p</th>
           </tr>
         </thead>
         <tbody>
           {skaters?.map((skater) => (
             <tr key={skater.playerId}>
-              <td>{skater.firstName}</td>
-              <td>{skater.lastName}</td>
+              <td>{`${skater.firstName.toLowerCase()} ${skater.lastName.toLowerCase()}`}</td>
+              <td>{skater.gamesPlayed}</td>
+              <td>{skater.plusMinus}</td>
+              <td>{skater.assists}</td>
               <td>{skater.goals}</td>
+              <td>{skater.totalPoints}</td>
             </tr>
           ))}
         </tbody>

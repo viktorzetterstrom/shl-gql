@@ -14,17 +14,21 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
       <table>
         <thead>
           <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Goals Against</th>
+            <th>name</th>
+            <th>gp</th>
+            <th>so</th>
+            <th>gaa</th>
+            <th>sv%</th>
           </tr>
         </thead>
         <tbody>
           {goalies?.map((goalie) => (
             <tr key={goalie.playerId}>
-              <td>{goalie.firstName}</td>
-              <td>{goalie.lastName}</td>
-              <td>{goalie.goalsAgainst}</td>
+              <td>{`${goalie.firstName.toLowerCase()} ${goalie.lastName.toLowerCase()}`}</td>
+              <td>{goalie.gamesPlayedOnIce}</td>
+              <td>{goalie.shutOuts}</td>
+              <td>{goalie.goalsAgainstAverage.toFixed(2)}</td>
+              <td>{`${goalie.savesPercentage.toFixed(1)}%`}</td>
             </tr>
           ))}
         </tbody>

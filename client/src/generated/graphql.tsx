@@ -257,14 +257,14 @@ export type GoaliesQueryVariables = Exact<{
 }>;
 
 
-export type GoaliesQuery = { __typename?: 'Query', goalies?: Array<{ __typename?: 'Goalie', playerId: string, firstName: string, lastName: string, goalsAgainst: number }> | null | undefined };
+export type GoaliesQuery = { __typename?: 'Query', goalies?: Array<{ __typename?: 'Goalie', playerId: string, firstName: string, lastName: string, gamesPlayedOnIce: number, goalsAgainstAverage: number, shutOuts: number, savesPercentage: number }> | null | undefined };
 
 export type SkatersQueryVariables = Exact<{
   input: SkatersInput;
 }>;
 
 
-export type SkatersQuery = { __typename?: 'Query', skaters?: Array<{ __typename?: 'Skater', playerId: string, firstName: string, lastName: string, goals: number }> | null | undefined };
+export type SkatersQuery = { __typename?: 'Query', skaters?: Array<{ __typename?: 'Skater', playerId: string, firstName: string, lastName: string, goals: number, assists: number, gamesPlayed: number, plusMinus: number, totalPoints: number }> | null | undefined };
 
 
 export const TeamsDocument = gql`
@@ -403,7 +403,10 @@ export const GoaliesDocument = gql`
     playerId
     firstName
     lastName
-    goalsAgainst
+    gamesPlayedOnIce
+    goalsAgainstAverage
+    shutOuts
+    savesPercentage
   }
 }
     `;
@@ -442,6 +445,10 @@ export const SkatersDocument = gql`
     firstName
     lastName
     goals
+    assists
+    gamesPlayed
+    plusMinus
+    totalPoints
   }
 }
     `;
