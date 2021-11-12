@@ -1,7 +1,7 @@
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import Image from "next/image";
 import { client } from "../../graphql/apollo-client";
-import { GoaliesDocument, Goalie, GoaliesQuery } from "../../generated/graphql";
+import { GoaliesDocument, GoaliesQuery } from "../../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../../config/active-season";
 import { StyledTable } from "../../components/styled-table";
