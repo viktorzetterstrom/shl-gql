@@ -1,12 +1,12 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import { sub as subFromDate } from "date-fns";
-import { client } from "../../graphql/apollo-client";
-import { GameDaysDocument, GameDaysQuery } from "../../generated/graphql";
-import { STATIC_PAGE_REVALIDATE_SECONDS } from "../../config/static-page-revalidate-seconds";
-import { StyledTable } from "../../components/styled-table";
+import { client } from "../graphql/apollo-client";
+import { GameDaysDocument, GameDaysQuery } from "../generated/graphql";
+import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
+import { StyledTable } from "../components/styled-table";
 import React from "react";
-import { ACTIVE_SEASON } from "../../config/active-season";
-import { GameDay } from "../../components";
+import { ACTIVE_SEASON } from "../config/active-season";
+import { GameDay } from "../components";
 
 interface GamesProps {
   gameDays: GameDaysQuery["gameDays"];
@@ -35,19 +35,12 @@ const Games: NextPage<GamesProps> = ({ gameDays }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = () => {
-  return {
-    paths: [{ params: { year: ACTIVE_SEASON } }],
-    fallback: "blocking",
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query<GameDaysQuery>({
     query: GameDaysDocument,
     variables: {
       input: {
-        year: params?.year,
+        year: ACTIVE_SEASON,
       },
     },
   });
