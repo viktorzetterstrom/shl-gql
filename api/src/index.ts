@@ -54,7 +54,7 @@ const main = async () => {
 
   server.applyMiddleware({ app });
 
-  app.listen(4000, () => console.log("shl-gql live on port 4000"));
+  app.listen(4001, () => console.log("shl-gql live on port 4001"));
 };
 
 main();
