@@ -10,21 +10,20 @@ export const NavBar: React.FC = () => {
 
   const nonBreakingSpaceCode = "\xa0";
   const routes = [
-    { route: "standings", title: "standings" },
-    { route: "results", title: "results" },
-    { route: "upcoming-games", title: `upcoming${nonBreakingSpaceCode}games` },
-    { route: "goalies", title: "goalies" },
-    { route: "skaters", title: "skaters" },
+    { route: "/standings", title: "standings" },
+    { route: "/results", title: "results" },
+    { route: "/upcoming-games", title: `upcoming${nonBreakingSpaceCode}games` },
+    { route: "/goalies", title: "goalies" },
+    { route: "/skaters", title: "skaters" },
   ];
 
   return (
     <nav className={styles.root}>
       {routes.map(({ route, title }) => {
-        const routePath = `/${route}`;
-        const isActivePath = routePath === currentPath;
+        const isActivePath = route === currentPath;
 
         return (
-          <Link prefetch={false} key={route} href={routePath}>
+          <Link prefetch={false} key={route} href={route}>
             <a className={clsx(isActivePath ? styles.active : null)}>{title}</a>
           </Link>
         );
