@@ -6,8 +6,8 @@ type TeamLogoProps = {
 
 export const TeamLogo: React.FC<TeamLogoProps> = ({ teamCode }) => (
   <Image
-    alt={`${teamCode} logo`}
-    src={`/img/${teamCode}-30.png`}
+    alt={`${teamCode.toLowerCase()} logo`}
+    src={`/img/${teamCode.toLowerCase()}-30.png`}
     width="15"
     height="15"
   />
