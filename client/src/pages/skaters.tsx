@@ -60,8 +60,8 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   return {
+    revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
-      revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
       skaters: data.skaters,
     },
   };
