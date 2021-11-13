@@ -24,7 +24,7 @@ export const NavBar: React.FC = () => {
         const isActivePath = routePath === currentPath;
 
         return (
-          <Link key={route} href={routePath}>
+          <Link prefetch={false} key={route} href={routePath}>
             <a className={clsx(isActivePath ? styles.active : null)}>{title}</a>
           </Link>
         );
