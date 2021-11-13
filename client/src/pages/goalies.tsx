@@ -1,10 +1,10 @@
 import type { GetStaticProps, NextPage } from "next";
-import Image from "next/image";
 import { client } from "../graphql/apollo-client";
 import { GoaliesDocument, GoaliesQuery } from "../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../config/active-season";
 import { StyledTable } from "../components/styled-table";
+import { TeamLogo } from "../components";
 
 interface GoaliesProps {
   goalies: GoaliesQuery["goalies"];
@@ -27,12 +27,7 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
           {goalies?.map((goalie) => (
             <tr key={goalie.playerId}>
               <td>
-                <Image
-                  alt={`${goalie.teamCode} logo`}
-                  src={`/img/${goalie.teamCode}-30.png`}
-                  width="15"
-                  height="15"
-                />
+                <TeamLogo teamCode={goalie.teamCode} />
                 {` ${goalie.firstName.toLowerCase()} ${goalie.lastName.toLowerCase()}`}
               </td>
               <td>{goalie.gamesPlayedOnIce}</td>

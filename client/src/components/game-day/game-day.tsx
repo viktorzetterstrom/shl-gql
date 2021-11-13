@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/image";
 import { GameDay as GameDayType } from "../../generated/graphql";
+import { TeamLogo } from "..";
 
 type GameDayProps = {
   gameDay: GameDayType;
@@ -21,21 +21,11 @@ export const GameDay: React.FC<GameDayProps> = ({
           <td>{game.time}</td>
           <td style={{ textAlign: "right" }}>
             {`${game.homeTeamName} `}
-            <Image
-              alt={`${game.homeTeamName} logo`}
-              src={`/img/${game.homeTeamCode}-30.png`}
-              width="15"
-              height="15"
-            />
+            <TeamLogo teamCode={game.homeTeamCode} />
           </td>
           <td>&nbsp;-&nbsp;</td>
           <td style={{ textAlign: "left" }}>
-            <Image
-              alt={`${game.awayTeamName} logo`}
-              src={`/img/${game.awayTeamCode}-30.png`}
-              width="15"
-              height="15"
-            />
+            <TeamLogo teamCode={game.awayTeamCode} />
             {` ${game.awayTeamName}`}
           </td>
           <td>{game.result}</td>

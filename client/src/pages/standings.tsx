@@ -1,10 +1,10 @@
 import type { GetStaticProps, NextPage } from "next";
-import Image from "next/image";
 import { client } from "../graphql/apollo-client";
 import { StandingsDocument, StandingsQuery } from "../generated/graphql";
 import { StyledTable } from "../components/styled-table";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../config/active-season";
+import { TeamLogo } from "../components";
 
 interface StandingsProps {
   standings: StandingsQuery["standings"];
@@ -31,12 +31,7 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => (
         {standings?.map((entry) => (
           <tr key={entry.teamCode}>
             <td>
-              <Image
-                alt={`${entry.teamName} logo`}
-                src={`/img/${entry.teamId}-30.png`}
-                width="15"
-                height="15"
-              />{" "}
+              <TeamLogo teamCode={entry.teamId} />{" "}
               {entry.teamName.toLowerCase()}
             </td>
             <td>{entry.gamesPlayed}</td>

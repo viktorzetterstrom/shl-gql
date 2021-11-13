@@ -1,10 +1,10 @@
 import type { GetStaticProps, NextPage } from "next";
-import Image from "next/image";
 import { client } from "../graphql/apollo-client";
 import { SkatersDocument, SkatersQuery } from "../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../config/active-season";
 import { StyledTable } from "../components/styled-table";
+import { TeamLogo } from "../components";
 
 interface SkatersProps {
   skaters: SkatersQuery["skaters"];
@@ -28,12 +28,7 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
           {skaters?.map((skater) => (
             <tr key={skater.playerId}>
               <td>
-                <Image
-                  alt={`${skater.teamCode} logo`}
-                  src={`/img/${skater.teamCode}-30.png`}
-                  width="15"
-                  height="15"
-                />
+                <TeamLogo teamCode={skater.teamCode} />
                 {` ${skater.firstName.toLowerCase()} ${skater.lastName.toLowerCase()}`}
               </td>
               <td>{skater.gamesPlayed}</td>
