@@ -1,16 +1,13 @@
 .table {
   width: 100%;
   max-width: 520px;
-}
-
-.table tbody tr td {
   text-align: center;
 }
 
-.table tbody tr td:empty::after {
+.table td:empty::after {
   content: "\00a0";
 }
 
-.table tbody tr td:first-child {
+.table td:first-child {
   text-align: left;
 }
