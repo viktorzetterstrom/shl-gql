@@ -2,7 +2,7 @@ import { Query, Resolver, Arg, Ctx } from "type-graphql";
 import { Context } from "..";
 import { StandingsApiResponse } from "../data-sources";
 import { StatisticsInput, StandingsEntry } from "../schemas";
-import { getTeamNameFromTeamCode } from "./utils/getTeamNameFromTeamCode";
+import { getTeamNameFromTeamCode } from "./utils/get-team-name-from-team-code";
 
 const formatStandingsResponse = (
   response: StandingsApiResponse

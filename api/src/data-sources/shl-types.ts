@@ -1,4 +1,4 @@
-import { TeamCode } from "../resolvers/utils/getTeamNameFromTeamCode";
+import { TeamCode } from "../resolvers/utils/get-team-name-from-team-code";
 
 interface ApiArticle {
   article_id: string;

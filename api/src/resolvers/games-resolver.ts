@@ -4,7 +4,7 @@ import { Context } from "..";
 import { GameApiResponse, GamesApiResponse } from "../data-sources";
 import { Game, GameInput, StatisticsInput } from "../schemas";
 import { GameDay } from "../schemas/game-day";
-import { getTeamNameFromTeamCode } from "./utils/getTeamNameFromTeamCode";
+import { getTeamNameFromTeamCode } from "./utils/get-team-name-from-team-code";
 
 const formatGameApiResponse = (response: GameApiResponse): Game => ({
   gameId: String(response.game_id),
