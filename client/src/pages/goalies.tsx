@@ -43,7 +43,7 @@ const Goalies: NextPage<GoaliesProps> = ({ goalies }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query<GoaliesQuery>({
+  const goaliesQuery = client.query<GoaliesQuery>({
     query: GoaliesDocument,
     variables: {
       input: {
@@ -55,7 +55,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
-      goalies: data.goalies,
+      goalies: (await goaliesQuery).data.goalies,
     },
   };
 };

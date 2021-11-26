@@ -45,7 +45,7 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query<SkatersQuery>({
+  const skatersQuery = await client.query<SkatersQuery>({
     query: SkatersDocument,
     variables: {
       input: {
@@ -57,7 +57,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
-      skaters: data.skaters,
+      skaters: (await skatersQuery).data.skaters,
     },
   };
 };

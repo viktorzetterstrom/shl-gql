@@ -36,7 +36,7 @@ const Games: NextPage<GamesProps> = ({ gameDays }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query<GameDaysQuery>({
+  const gameDaysQuery = client.query<GameDaysQuery>({
     query: GameDaysDocument,
     variables: {
       input: {
@@ -48,7 +48,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
-      gameDays: data.gameDays,
+      gameDays: (await gameDaysQuery).data.gameDays,
     },
   };
 };

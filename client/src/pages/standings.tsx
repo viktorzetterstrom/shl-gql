@@ -51,7 +51,7 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query<StandingsQuery>({
+  const standingsQuery = await client.query<StandingsQuery>({
     query: StandingsDocument,
     variables: {
       input: {
@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
     props: {
-      standings: data.standings,
+      standings: (await standingsQuery).data.standings,
     },
   };
 };
