@@ -1,4 +1,4 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import { client } from "../graphql/apollo-client";
 import { SkatersDocument, SkatersQuery } from "../generated/graphql";
 import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
@@ -42,13 +42,6 @@ const Skaters: NextPage<SkatersProps> = ({ skaters }) => {
       </StyledTable>
     </div>
   );
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
 };
 
 export const getStaticProps: GetStaticProps = async () => {

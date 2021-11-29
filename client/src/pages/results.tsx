@@ -1,4 +1,4 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import { sub as subFromDate } from "date-fns";
 import { client } from "../graphql/apollo-client";
 import { GameDaysDocument, GameDaysQuery } from "../generated/graphql";
@@ -33,13 +33,6 @@ const Games: NextPage<GamesProps> = ({ gameDays }) => {
       </StyledTable>
     </div>
   );
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
 };
 
 export const getStaticProps: GetStaticProps = async () => {

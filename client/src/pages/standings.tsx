@@ -1,4 +1,4 @@
-import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import type { GetStaticProps, NextPage } from "next";
 import { client } from "../graphql/apollo-client";
 import { StandingsDocument, StandingsQuery } from "../generated/graphql";
 import { StyledTable } from "../components/styled-table";
@@ -49,13 +49,6 @@ const Standings: NextPage<StandingsProps> = ({ standings }) => (
     </StyledTable>
   </div>
 );
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
 
 export const getStaticProps: GetStaticProps = async () => {
   const standingsQuery = await client.query<StandingsQuery>({
