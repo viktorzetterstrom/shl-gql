@@ -17,6 +17,8 @@ import {
 } from "./shl-types";
 import { GoaliesSortOrder, SkatersSortOrder } from "../schemas";
 
+const FIVE_MINUTES = 300;
+
 interface Season {
   games: () => Promise<GamesApiResponse>;
   game: (gameId: string) => Promise<GameApiResponse>;
@@ -64,6 +66,7 @@ export class Shl extends RESTDataSource {
   protected async willSendRequest(request: RequestOptions): Promise<void> {
     if (new Date() > this.expires) await this.connect();
 
+    request.cacheOptions = { ttl: FIVE_MINUTES };
     request.headers.set("authorization", `Bearer ${this.accessToken}`);
   }
 
