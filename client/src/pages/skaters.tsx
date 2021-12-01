@@ -1,7 +1,6 @@
 import type { GetStaticProps, NextPage } from "next";
 import { client } from "../graphql/apollo-client";
 import { SkatersDocument, SkatersQuery } from "../generated/graphql";
-import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../config/active-season";
 import { StyledTable } from "../components/styled-table";
 import { TeamLogo } from "../components";
@@ -55,7 +54,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   return {
-    revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
+    revalidate: 60,
     props: {
       skaters: (await skatersQuery).data.skaters,
     },

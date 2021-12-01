@@ -2,7 +2,6 @@ import type { GetStaticProps, NextPage } from "next";
 import { sub as subFromDate } from "date-fns";
 import { client } from "../graphql/apollo-client";
 import { GameDaysDocument, GameDaysQuery } from "../generated/graphql";
-import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { StyledTable } from "../components/styled-table";
 import React from "react";
 import { ACTIVE_SEASON } from "../config/active-season";
@@ -46,7 +45,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   return {
-    revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
+    revalidate: 60,
     props: {
       gameDays: (await gameDaysQuery).data.gameDays,
     },

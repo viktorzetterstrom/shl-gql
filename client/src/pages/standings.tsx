@@ -2,7 +2,6 @@ import type { GetStaticProps, NextPage } from "next";
 import { client } from "../graphql/apollo-client";
 import { StandingsDocument, StandingsQuery } from "../generated/graphql";
 import { StyledTable } from "../components/styled-table";
-import { STATIC_PAGE_REVALIDATE_SECONDS } from "../config/static-page-revalidate-seconds";
 import { ACTIVE_SEASON } from "../config/active-season";
 import { TeamLogo } from "../components";
 
@@ -61,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
   });
 
   return {
-    revalidate: STATIC_PAGE_REVALIDATE_SECONDS,
+    revalidate: 60,
     props: {
       standings: (await standingsQuery).data.standings,
     },
