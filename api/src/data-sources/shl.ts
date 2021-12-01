@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-  HTTPCache,
-  RequestOptions,
-  RESTDataSource,
-} from "apollo-datasource-rest";
+import { HTTPCache, RequestOptions } from "apollo-datasource-rest";
 import {
   ArticlesApiResponse,
   GameApiResponse,
@@ -16,8 +12,7 @@ import {
   VideosApiResponse,
 } from "./shl-types";
 import { GoaliesSortOrder, SkatersSortOrder } from "../schemas";
-
-const FIVE_MINUTES = 300;
+import { NoCacheRESTDataSource } from "./no-cache-rest-data-source";
 
 interface Season {
   games: () => Promise<GamesApiResponse>;
@@ -31,7 +26,7 @@ interface Season {
   };
 }
 
-export class Shl extends RESTDataSource {
+export class Shl extends NoCacheRESTDataSource {
   private accessToken: string | undefined;
   private expires: Date = new Date();
 
@@ -66,7 +61,6 @@ export class Shl extends RESTDataSource {
   protected async willSendRequest(request: RequestOptions): Promise<void> {
     if (new Date() > this.expires) await this.connect();
 
-    request.cacheOptions = { ttl: FIVE_MINUTES };
     request.headers.set("authorization", `Bearer ${this.accessToken}`);
   }
 
